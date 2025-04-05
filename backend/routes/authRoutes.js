@@ -272,7 +272,7 @@ router.post("/forgot-password", async (req, res) => {
     console.log("✅ Password Reset Token Generated:", resetToken);
 
     // ✅ Use localhost for testing instead of Netlify
-    const resetLink = `http://localhost:5500/frontend/authentication/reset-password.html?token=${resetToken}`;
+    const resetLink = `https://adarsh-holidays-backend-production.up.railway.app/authentication/reset-password.html?token=${resetToken}`;
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -456,7 +456,7 @@ router.get("/verify-email/:token", async (req, res) => {
 
     // ✅ Redirect to success page after verification
     return res.redirect(
-      `${process.env.CLIENT_URL}/frontend/authentication/verify-email.html`
+      `${process.env.CLIENT_URL}https://adarsh-holidays-backend-production.up.railway.app/authentication/verify-email.html`
     );
   } catch (err) {
     console.error("❌ Email Verification Error:", err);
