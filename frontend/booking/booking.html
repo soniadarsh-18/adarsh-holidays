@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booking Form</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <!-- FontAwesome (For icons used in the profile update form) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.1/css/all.css" />
+  <!-- Flatpickr (For date selection, e.g., birthday field in profile update) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+
+<body>
+  <div class="tab-container">
+    <div class="tabs">
+      <button class="tab active" onclick="openTab(event, 'flight')">
+        <i class="fa-solid fa-plane-departure"></i>&nbsp;&nbsp;&nbsp;Flight
+      </button>
+      <button class="tab" onclick="openTab(event, 'train')">
+        <i class="fa-solid fa-train-subway"></i>&nbsp;&nbsp;&nbsp;Train
+      </button>
+      <button class="tab" onclick="openTab(event, 'bus')">
+        <i class="fa-solid fa-bus"></i>&nbsp;&nbsp;&nbsp;Bus
+      </button>
+    </div>
+
+    <!-- Flight Booking Form -->
+    <div id="flight" class="tab-content active">
+      <div class="form-row">
+        <div class="form-group">
+          <label>From</label>
+          <input type="text" id="from" placeholder="From" required />
+        </div>
+        <div class="form-group">
+          <label>To</label>
+          <input type="text" id="to" placeholder="To" required />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="departure">Departure</label>
+          <input type="text" id="departure" placeholder="dd-mm-yyyy" readonly required />
+        </div>
+
+        <div class="form-group">
+          <label for="return">Return</label>
+          <input type="text" id="return" placeholder="dd-mm-yyyy" readonly required />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>No. of Travellers</label>
+          <input type="number" id="adults" placeholder="Travellers" min="1" required />
+        </div>
+
+        <div class="form-group">
+          <label>Class</label>
+          <div class="custom-dropdown">
+            <select id="travelClass" required>
+              <option value="" disabled selected>Select Class</option>
+              <option value="economy">Economy</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <button class="search-btn" onclick="searchFlights()">Search Flights</button>
+      <center><span id="error-message" style="color: red; display: none; font-size: 15px; margin-top: 15px;">
+          Please fill all the fields.
+        </span></center>
+
+
+    </div>
+    <div id="results" class="results-container"></div>
+  </div>
+
+  <!-- Train Booking Form -->
+  <div id="train" class="tab-content">
+    <div class="form-group">
+      <input type="text" id="trainFrom" placeholder="From" />
+      <input type="text" id="trainTo" placeholder="To" />
+      <input type="date" id="trainDeparture" />
+      <select id="trainClass">
+        <option value="">Select Class</option>
+        <option value="2A">AC 2 Tier (2A)</option>
+        <option value="3A">AC 3 Tier (3A)</option>
+        <option value="SL">Sleeper (SL)</option>
+      </select>
+      <button class="search-btn" onclick="searchTrains()">
+        Search Trains
+      </button>
+    </div>
+    <div id="trainResults" class="results-container"></div>
+  </div>
+
+  <!-- Bus Booking Form -->
+  <div id="bus" class="tab-content">
+    <p>Bus booking form will be added here.</p>
+  </div>
+  </div>
+
+  <div id="booking-popup" class="popup" style="display: none">
+    <div class="popup-content"></div>
+  </div>
+
+  <!-- Payment Section -->
+  <div id="payment-section" class="popup" style="display: none">
+    <div class="popup-content">
+      <h2>Payment</h2>
+      <p>
+        Total Amount: ₹${selectedFlight ? selectedFlight.price.total : '0'}
+      </p>
+      <button onclick="handlePayment()">Pay Now</button>
+    </div>
+  </div>
+
+  <!-- Confirmation Section -->
+  <div id="confirmation-section" class="popup" style="display: none">
+    <div class="popup-content">
+      <h2>Booking Confirmed!</h2>
+      <p>Your flight has been successfully booked.</p>
+    </div>
+  </div>
+
+  <script src="assets/script.js"></script>
+</body>
+
+</html>

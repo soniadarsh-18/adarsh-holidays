@@ -1,0 +1,1303 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <!-- favicon -->
+   <link rel="icon" type="image/x-icon" href="/frontend/assets/images/plane-travel-icon.ico">
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="/frontend/assets/vendors/bootstrap/css/bootstrap.min.css" media="all">
+   <!-- Fonts Awesome CSS -->
+   <link rel="stylesheet" type="text/css" href="/frontend/assets/vendors/fontawesome/css/all.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <!-- jquery-ui css -->
+   <link rel="stylesheet" type="text/css" href="/frontend/assets/vendors/jquery-ui/jquery-ui.min.css">
+   <!-- modal video css -->
+   <link rel="stylesheet" type="text/css" href="/frontend/assets/vendors/modal-video/modal-video.min.css">
+   <!-- light box css -->
+   <link rel="stylesheet" type="text/css" href="/frontend/assets/vendors/lightbox/dist/css/lightbox.min.css">
+
+   <!-- slick slider css -->
+   <link rel="stylesheet" type="text/css" href="/frontend/assets/vendors/slick/slick.css">
+   <link rel="stylesheet" type="text/css" href="/frontend/assets/vendors/slick/slick-theme.css">
+   <!-- google fonts -->
+   <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap"
+      rel="stylesheet">
+   <!-- Custom CSS -->
+   <link rel="stylesheet" type="text/css" href="/frontend/assets/css/style.css">
+   <link rel="stylesheet" type="text/css" href="/frontend/user-dashboard/styles.css">
+
+   <!--flight-->
+   <link rel="stylesheet" type="text/css" href="/frontend/text.css">
+   <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.1/css/all.css" />
+
+
+
+   <title>Experience the Beauty of Travel </title>
+   <style>
+      .trip-search-section {
+         width: 100%;
+         background: #fff;
+         padding: 20px;
+         box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .container {
+         max-width: 1200px;
+         margin: auto;
+      }
+
+      .tab-buttons {
+         display: flex;
+         justify-content: center;
+         margin-bottom: 20px;
+      }
+
+      .tab {
+         background: #ddd;
+         padding: 10px 20px;
+         border: none;
+         cursor: pointer;
+         margin: 0 5px;
+         font-size: 16px;
+      }
+
+      .tab.active {
+         background: #e69d2c;
+         color: #fff;
+      }
+
+      .trip-search-inner {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 15px;
+         justify-content: space-between;
+      }
+
+      .input-group {
+         flex: 1;
+         min-width: 200px;
+      }
+
+      input,
+      select {
+         width: 100%;
+         padding: 10px;
+         border: 1px solid #ddd;
+         border-radius: 5px;
+      }
+
+      .search-btn {
+         background: #e69d2c;
+         color: #fff;
+         padding: 12px;
+         font-size: 16px;
+         border: none;
+         cursor: pointer;
+         width: 100%;
+      }
+
+      .search-btn:hover {
+         background: #000;
+      }
+
+      /* HTML: <div class="loader"></div> */
+      /* HTML: <div class="loader"></div> */
+      .loader {
+         width: 100px;
+         aspect-ratio: 1;
+         background:
+            radial-gradient(farthest-side at bottom right, #ED5B06 90%, #0000),
+            radial-gradient(farthest-side at bottom left, #ED5B06 90%, #0000),
+            radial-gradient(farthest-side at top right, #ED5B06 90%, #0000),
+            radial-gradient(farthest-side at top left, #ED5B06 90%, #0000),
+            radial-gradient(farthest-side at bottom right, #CC4B00 90%, #0000),
+            radial-gradient(farthest-side at bottom left, #CC4B00 90%, #0000),
+            radial-gradient(farthest-side at top right, #CC4B00 90%, #0000),
+            radial-gradient(farthest-side at top left, #CC4B00 90%, #0000),
+            radial-gradient(farthest-side at bottom right, #0B0C0C 90%, #0000),
+            radial-gradient(farthest-side at bottom left, #0B0C0C 90%, #0000),
+            radial-gradient(farthest-side at top right, #0B0C0C 90%, #0000),
+            radial-gradient(farthest-side at top left, #0B0C0C 90%, #0000);
+         background-size: 25% 25%;
+         background-repeat: no-repeat;
+         animation: l16 2s infinite;
+      }
+
+      @keyframes l16 {
+         0% {
+            background-position:
+               calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
+               calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
+               calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3)
+         }
+
+         16.67% {
+            background-position:
+               calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3),
+               calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
+               calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3)
+         }
+
+         33.33% {
+            background-position:
+               calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3),
+               calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3),
+               calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3)
+         }
+
+         50% {
+            background-position:
+               calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3),
+               calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3),
+               calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3)
+         }
+
+         66.67% {
+            background-position:
+               calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
+               calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3),
+               calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3)
+         }
+
+         83.33% {
+            background-position:
+               calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
+               calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
+               calc(0*100%/3) calc(0*100%/3), calc(3*100%/3) calc(0*100%/3), calc(0*100%/3) calc(3*100%/3), calc(3*100%/3) calc(3*100%/3)
+         }
+
+         100% {
+            background-position:
+               calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
+               calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3),
+               calc(1*100%/3) calc(1*100%/3), calc(2*100%/3) calc(1*100%/3), calc(1*100%/3) calc(2*100%/3), calc(2*100%/3) calc(2*100%/3)
+         }
+      }
+   </style>
+
+</head>
+
+<body class="home">
+   <div id="siteLoader" class="site-loader">
+      <div class="preloader-content">
+         <div class="loader"></div>
+      </div>
+   </div>
+   <div id="page" class="full-page">
+      <header id="masthead" class="site-header header-primary">
+         <!-- header html start -->
+         <div class="top-header">
+            <div class="container">
+               <div class="row">
+               </div>
+            </div>
+         </div>
+         <div class="bottom-header">
+            <div class="container d-flex justify-content-between align-items-center">
+               <div class="site-identity">
+                  <h1 class="site-title">
+                     <a href="index.html">
+                        <img class="white-logo  " src="assets/images/adarsh-holidays-rectange-logo.webp" alt="logo">
+                        <img class="black-logo " src="assets/images/adarsh-holidays-rectange-logo.webp" alt="logo">
+                     </a>
+                  </h1>
+               </div>
+               <div class="main-navigation d-none d-lg-block">
+                  <nav id="navigation" class="navigation">
+                     <ul>
+                        <li>
+                           <a href="index.html">Home</a>
+                        </li>
+                        <li>
+                           <a href="/frontend/pages/other-pages/about.html">About Us</a>
+                        </li>
+                        <li class="menu-item-has-children">
+                           <a href="more-tour-destination.html">Tours</a>
+                           <ul>
+                              <li>
+                                 <a href="mahabaleshwar-tour-packages.html">Mahabaleshwar </a>
+                              </li>
+                              <li>
+                                 <a href="lonavala-tour-packages.html">Lonavala </a>
+                              </li>
+                              <li>
+                                 <a href="goa-tour-packages.html">Goa </a>
+                              </li>
+                              <li>
+                                 <a href="matheran-tour-packages.html">Matheran </a>
+                              </li>
+                              <li>
+                                 <a href="shirdi-tour-packages.html">Shirdi </a>
+                              </li>
+                              <li>
+                                 <a href="ganapatipule-tour-packages.html">Ganapatipule </a>
+                              </li>
+                              <li>
+                                 <a href="saputara-tour-packages.html">Saputara </a>
+                              </li>
+                              <li>
+                                 <a href="aurangabad-tour-packages.html">Aurangabad </a>
+                              </li>
+                           </ul>
+                        </li>
+                        <li class="menu-item-has-children">
+                           <a href="javascript:void(0);">Hotels</a>
+                           <ul>
+                              <li>
+                                 <a href="mahabaleshwar-hotel-packages.html">Mahabaleshwar Hotel Packages </a>
+                              </li>
+                              <li>
+                                 <a href="lonavala-hotel-packages.html">Lonavala Hotel Packages </a>
+                              </li>
+                              <li>
+                                 <a href="goa-hotel-packages.html">Goa Hotel Packages </a>
+                              </li>
+                              <li>
+                                 <a href="matheran-hotel-packages.html">Matheran Hotel Packages </a>
+                              </li>
+                              <li>
+                                 <a href="shirdi-hotel-packages.html">Shirdi Hotel Packages </a>
+                              </li>
+                              <li>
+                                 <a href="ganapatipule-hotel-packages.html">Ganapatipule Hotel Packages </a>
+                              </li>
+                              <li>
+                                 <a href="saputara-hotel-packages.html">Saputara Hotel Packages </a>
+                              </li>
+                              <li>
+                                 <a href="aurangabad-hotel-packages.html">Aurangabad Hotel Packages</a>
+                              </li>
+                           </ul>
+                        </li>
+                        <li class="menu-item-has-children">
+                           <a href="javascript:void(0);">Rentals</a>
+                           <ul>
+                              <li>
+                                 <a href="/frontend/pages/other-pages/car-rental.html">Car Rental</a>
+                              </li>
+                              <li>
+                                 <a href="/frontend/pages/other-pages/bus-rental.html">Bus Rental</a>
+                              </li>
+                           </ul>
+                        </li>
+                        <li>
+                           <a href="/frontend/pages/other-pages/contact.html">Contact </a>
+                        </li>
+                     </ul>
+                  </nav>
+               </div>
+               <!-- Parent container to maintain relative positioning -->
+               <div class="user-auth-container">
+                  <!-- Authentication Button -->
+                  <a href="/frontend/user-dashboard/index.html" class="user-authentication-sign-in-button"
+                     id="authButton">
+                     <i class="fa-solid fa-user"></i> Sign In
+                  </a>
+                  <!-- Dropdown Menu (Initially Hidden) -->
+                  <div id="userDropdown" class="dropdown">
+                     <a href="#profileSection"><i class="fas fa-user"></i>&nbsp;&nbsp;&nbsp;Profile</a>
+                     <a href="#loginDetailsSection"><i class="fas fa-lock"></i>&nbsp;&nbsp;&nbsp;Login Details</a>
+                     <!-- <a href="#bookingsDetailsSection"><i
+                           class="fa-solid fa-ticket-airline"></i>&nbsp;&nbsp;&nbsp;Bookings</a> -->
+                     <a href="#coTravellersSection"><i class="fas fa-users"></i>&nbsp;&nbsp;&nbsp;Co-travellers</a>
+                     <a href="#settingsSection"><i class="fas fa-cog"></i>&nbsp;&nbsp;&nbsp;Settings</a>
+                     <a href="#termsConditionsSection"><i class="fa-solid fa-file"></i>&nbsp;&nbsp;&nbsp;Terms &
+                        Conditions</a>
+                     <a href="#" id="logoutButton"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;&nbsp;Logout</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="mobile-menu-container"></div>
+      </header>
+      <main id="content" class="site-main">
+         <!-- Home slider html start -->
+         <section class="home-slider-section">
+            <div class="home-slider">
+               <div class="home-banner-items">
+                  <div class="banner-inner-wrap"
+                     style="background-image: url(assets/images/Begin-unforgettable-journeys.jpg);">
+                  </div>
+                  <div class="banner-content-wrap">
+                     <div class="container">
+                        <div class="banner-content text-center">
+                           <h2 class="banner-title">Begin unforgettable journey.</h2>
+                           <p>Join Adarsh Holidays on amazing journeys where we combine the beauties of the world with
+                              the rich legacy of India. Let us lead you on fascinating adventures that will reveal
+                              fascinating cultures and stunning scenery, making sure that every expedition is truly
+                              unforgettable. </p>
+                           <a href="#booking-form" class="button-primary">Start your Journey&nbsp;<i
+                                 class="fa-solid fa-arrow-down" style="font-size: 16px;"></i></a>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="overlay"></div>
+               </div>
+               <div class="home-banner-items">
+                  <div class="banner-inner-wrap"
+                     style="background-image: url(assets/images/Find-Ideal-Rentals-Now.jpg);">
+                  </div>
+                  <div class="banner-content-wrap">
+                     <div class="container">
+                        <div class="banner-content text-center">
+                           <h2 class="banner-title">Find Ideal Rentals Now!</h2>
+                           <p>Check out the wide range of rental automobiles we provide at Adarsh Holidays. Find the
+                              ideal car, from little cars to capacious SUVs, to guarantee affordability, dependability,
+                              and convenience for a comfortable and enjoyable trip every time. </p>
+                           <button onclick="showBookingForm()" class="button-primary">Rent Now!&nbsp;<i
+                                 class="fa-solid fa-cars" style="font-size: 16px;"></i></button>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="overlay"></div>
+               </div>
+               <div class="home-banner-items">
+                  <div class="banner-inner-wrap"
+                     style="background-image: url(assets/images/Book-Now-Easy-Bus-Travel.jpg);">
+                  </div>
+                  <div class="banner-content-wrap">
+                     <div class="container">
+                        <div class="banner-content text-center">
+                           <h2 class="banner-title">Book Now! Easy Bus Travel</h2>
+                           <p>With the straightforward bus booking process from Adarsh Holidays, we are at your service.
+                              Use the ease of hassle-free travel, adaptable schedules, and flawless reservations to your
+                              advantage. </p>
+                           <a href="#" class="button-primary">Book Now&nbsp;<i class="fa-solid fa-bus-simple"
+                                 style="font-size: 16px;"></i></a>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="overlay"></div>
+               </div>
+               <div class="home-banner-items">
+                  <div class="banner-inner-wrap"
+                     style="background-image: url(assets/images/At-your-service-\ discover-travel-joy.jpg);">
+                  </div>
+                  <div class="banner-content-wrap">
+                     <div class="container">
+                        <div class="banner-content text-center">
+                           <h2 class="banner-title">At your service, discover travel joy</h2>
+                           <p>We provide a high priority on your protection, comfort, and safety at our service so that
+                              you can enjoy traveling completely at ease. Our knowledgeable advice and uncompromising
+                              dedication to your wellbeing ensure that your trip will be entertaining, safe, and
+                              worry-free.</p>
+                           <a href="#booking-form" class="button-primary">Discover More&nbsp;<i
+                                 class="fa-solid fa-arrow-down" style="font-size: 16px;"></i></a>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="overlay"></div>
+               </div>
+            </div>
+         </section>
+         <!-- slider html start -->
+         <!-- Home search field html start -->
+         <!-- <a href="javascript:void(0);" name="booking-form">
+            <div class="trip-search-section shape-search-section">
+               <div class="slider-shape"></div>
+               <div class="container">
+                  <form method="post"
+                     action="https://script.google.com/macros/s/AKfycbzO21nnNxlsxPtnEuN7-X72vNYLE35RAtsjDowYhZzRwl-F0DGW-usFOArd6UzCqUuR/exec"
+                     name="contact-form" netlify>
+                     <div class="trip-search-inner white-bg d-flex">
+
+                        <div class="input-group">
+                           <label> Full Name* </label>
+                           <input type="text" name="full-name" placeholder="Enter Name" required>
+                        </div>
+                        <div class="input-group">
+                           <label for="phone"> What'sapp Number* </label>
+                           <input type="tel" id="phone" name="whatsapp-number" placeholder="Enter Number" required>
+                        </div>
+                        <div class="input-group">
+                           <label> Short Address* </label>
+                           <input type="text" name="short-address" placeholder="Enter Address" required>
+                        </div>
+                        <div class="input-group">
+                           <label> Add Destination* </label>
+                           <input type="text" name="add-destination" placeholder="Enter Destination" required>
+                        </div>
+                        <div class="input-group">
+                           <label> Max Number* </label>
+                           <input type="number" id="max-number" name="number-of-people" placeholder="No.of People"
+                              required>
+                        </div>
+                        <div class="input-group">
+                           <label> Adult* </label>
+                           <input type="number" id="adult-number" name="number-of-adult" placeholder="No.of Adult"
+                              required>
+                        </div>
+                        <div class="input-group">
+                           <label> Children* </label>
+                           <input type="number" id="children-number" name="number-of-children"
+                              placeholder="No.of Children" required>
+                        </div>
+
+                        <div class="input-group width-col-3">
+                           <label> Checkin Date </label>
+                           <i class="far fa-calendar"></i>
+                           <input class="input-date-picker" id="checkin-date" type="text" name="Checkin"
+                              placeholder="MM / DD / YY" autocomplete="off" readonly="readonly">
+                        </div>
+                        <div class="input-group width-col-3">
+                           <label> Checkout Date </label>
+                           <i class="far fa-calendar"></i>
+                           <input class="input-date-picker" id="checkout-date" type="text" name="Checkout"
+                              placeholder="MM / DD / YY" autocomplete="off" readonly="readonly">
+                        </div>
+
+                        <div class="input-group width-col-3">
+                           <input type="submit" value="Submit " id="submit">
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </a> -->
+         <div class="trip-search-section">
+            <div class="container">
+               <div class="tab-container">
+                  <div class="tabs">
+                     <button class="tab active" onclick="openTab(event, 'flight')">Flight</button>
+                     <button class="tab" onclick="openTab(event, 'train')">Train</button>
+                     <button class="tab" onclick="openTab(event, 'bus')">Bus</button>
+                  </div>
+
+                  <div id="flight" class="tab-content active">
+                     <div class="form-group">
+                        <input type="text" id="from" placeholder="From">
+                        <input type="text" id="to" placeholder="To">
+                        <input type="date" id="departure">
+                        <input type="date" id="return">
+                        <input type="number" id="adults" placeholder="Travellers">
+                        <select id="travelClass">
+                           <option value="economy">Economy</option>
+                           <option value="business">Business</option>
+                        </select>
+                        <button onclick="searchFlights()">Search</button>
+                     </div>
+                     <div id="results" class="results-container"></div>
+                  </div>
+
+                  <div id="train" class="tab-content">
+                     <p>Train booking form will be added here.</p>
+                  </div>
+
+                  <div id="bus" class="tab-content">
+                     <p>Bus booking form will be added here.</p>
+                  </div>
+               </div>
+
+               <div id="booking-popup" class="popup" style="display: none;">
+                  <div class="popup-content"></div>
+               </div>
+
+               <!-- Payment Section -->
+               <div id="payment-section" class="popup" style="display: none;">
+                  <div class="popup-content">
+                     <h2>Payment</h2>
+                     <p>Total Amount: ₹${selectedFlight ? selectedFlight.price.total : '0'}</p>
+                     <button onclick="handlePayment()">Pay Now</button>
+                  </div>
+               </div>
+
+               <!-- Confirmation Section -->
+               <div id="confirmation-section" class="popup" style="display: none;">
+                  <div class="popup-content">
+                     <h2>Booking Confirmed!</h2>
+                     <p>Your flight has been successfully booked.</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- search search field html end -->
+         <section class="destination-section">
+
+            <div class="container">
+               <div class="section-heading">
+                  <div class="row align-items-end">
+                     <div class="col-lg-7">
+                        <h5 class="dash-style">POPULAR DESTINATION</h5>
+                        <h2>TOP NOTCH DESTINATION</h2>
+                     </div>
+                     <div class="col-lg-5">
+                        <div class="section-disc"> India hosts world-class attractions like the iconic Taj Mahal and
+                           serene Kerala backwaters. Discover rich cultures, scenic vistas, and historic marvels,
+                           crafting unforgettable journeys for every traveler. </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="destination-inner destination-three-column">
+                  <div class="row">
+                     <div class="col-lg-7">
+                        <div class="row">
+                           <a href="mahabaleshwar-tour-packages.html">
+                              <div class="col-sm-6">
+                                 <div class="desti-item overlay-desti-item">
+                                    <figure class="desti-image">
+                                       <img src="assets/images/Mahabaleshwar-travel-by-adarsh-holidays.jpg" alt="">
+                                    </figure>
+                                    <div class="meta-cat bg-meta-cat">
+                                       <p>Mahabaleshwar</p>
+                                    </div>
+                                 </div>
+                           </a>
+                        </div>
+                        <div class="col-sm-6">
+                           <a href="lonavala-tour-packages.html"></a>
+                           <div class="desti-item overlay-desti-item">
+                              <figure class="desti-image">
+                                 <img src="assets/images/Lonavala-travel-by-adarsh-holidays.jpg" alt="">
+                              </figure>
+                              <div class="meta-cat bg-meta-cat">
+                                 <p>Lonavala</p>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     </a>
+                  </div>
+                  <div class="col-lg-5">
+                     <div class="row">
+                        <div class="col-md-6 col-xl-12">
+                           <a href="goa-tour-packages.html">
+                              <div class="desti-item overlay-desti-item">
+                                 <figure class="desti-image">
+                                    <img src="assets/images/Goa-travel-by-adarsh-holidays.jpg" alt="">
+                                 </figure>
+                                 <div class="meta-cat bg-meta-cat">
+                                    <p>Goa</p>
+                                 </div>
+                              </div>
+                           </a>
+                        </div>
+                        <div class="col-md-6 col-xl-12">
+                           <div class="desti-item overlay-desti-item">
+                              <figure class="desti-image">
+                                 <img src="assets/images/Rajasthan-travel-by-adarsh-holidays.jpg" alt="">
+                              </figure>
+                              <div class="meta-cat bg-meta-cat">
+                                 <p>rajasthan</p>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="btn-wrap text-center">
+                  <a href="more-tour-destination.html" class="button-primary">MORE TOUR DESTINATION&nbsp;<i
+                        class="fa-solid fa-arrow-right" style="font-size: 16px;"></i></a>
+               </div>
+            </div>
+   </div>
+   </section>
+   <!-- Home packages section html start -->
+   <!-- Home callback section html start -->
+   <section class="callback-section">
+      <div class="container">
+         <div class="row no-gutters align-items-center">
+            <div class="col-lg-5">
+               <div class="callback-img"
+                  style="background-image: url(assets/images/travellers-travelling-with-adarsh-holidays.jpg);">
+               </div>
+            </div>
+            <div class="col-lg-7">
+               <div class="callback-inner">
+                  <div class="section-heading section-heading-white">
+                     <h5 class="dash-style">About us</h5>
+                     <h2>A Smiling Agent For You</h2>
+                     <p>Adarsh Holidays Is A Leading Tour And Travel Company That Provides Personalized And
+                        Affordable Travel Experiences For Individuals And Groups. Whether you're seeking a serene
+                        beach getaway, a thrilling adventure, or a cultural exploration, we curate tailor-made
+                        itineraries to match your desires. With attention to detail and a commitment to
+                        excellence, we guarantee hassle-free travel experiences. Our Dedicated Team Works To
+                        Ensure A Seamless And Enjoyable Journey For All Our Customers. </p>
+                     <div class="btn-wrap-1">
+                        <a href="/frontend/pages/other-pages/about.html" class="button-primary">KNOW MORE&nbsp;<i
+                              class="fa-solid fa-arrow-right" style="font-size: 16px;"></i></a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+   </section>
+   <!-- callback html end -->
+   <section class="package-section">
+      <div class="container">
+         <div class="section-heading text-center">
+            <div class="row">
+               <div class="col-lg-8 offset-lg-2">
+                  <h5 class="dash-style">EXPLORE GREAT PLACES</h5>
+                  <h2>POPULAR PACKAGES</h2>
+                  <p>Discover our well -liked packages at Adarsh Holidays, which have been specially selected for
+                     amazing travel adventures. Discover fascinating locations, opulent lodgings, knowledgeable
+                     guides, and flawless itineraries to make your trip distinctive and unforgettable. </p>
+               </div>
+            </div>
+         </div>
+         <div class="package-inner">
+            <div class="row">
+               <div class="col-lg-4 col-md-6">
+                  <div class="package-wrap">
+                     <figure class="feature-image">
+                        <a href="#">
+                           <img src="assets/images/uttaranchal-travel-by-adarsh-holidays.jpg" alt="">
+                        </a>
+                     </figure>
+
+                     <div class="package-content-wrap">
+                        <div class="package-content">
+                           <h3>
+                              <a href="#">Group Tour UT – Uttaranchal Tour 8N-9D</a>
+                           </h3>
+                           <div class="review-area">
+                              <span class="review-text">(251 reviews)</span>
+                              <div class="rating-start" title="Rated 5 out of 5">
+                                 <span style="width: 60%"></span>
+                              </div>
+                           </div>
+                           <p>2N Mussoorie – 1N Haridwar – 1N Corbet – 3N Bhimtal – 1N Delhi</p>
+                           <div class="btn-wrap">
+                              <a href="#" class="button-text width-6">Book Now<i class="fas fa-arrow-right"></i></a>
+
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-lg-4 col-md-6">
+                  <div class="package-wrap">
+                     <figure class="feature-image">
+                        <a href="#">
+                           <img src="assets/images/srinagar-kargil-travel-by-adarsh-holidays.jpg" alt="">
+                        </a>
+                     </figure>
+                     <div class="package-content-wrap">
+                        <div class="package-content">
+                           <h3>
+                              <a href="#">Group Tour JK -01 Srinagar Kargil Leh Tour 7N-8D</a>
+                           </h3>
+                           <div class="review-area">
+                              <span class="review-text">(301 reviews)</span>
+                              <div class="rating-start" title="Rated 5 out of 5">
+                                 <span style="width: 60%"></span>
+                              </div>
+                           </div>
+                           <p>1N Srinagar – 1N Kargil – 1N Nubra Vallery – 4N Leh Ladakh</p>
+                           <div class="btn-wrap">
+                              <a href="#" class="button-text width-6">Book Now<i class="fas fa-arrow-right"></i></a>
+
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-lg-4 col-md-6">
+                  <div class="package-wrap">
+                     <figure class="feature-image">
+                        <a href="#">
+                           <img src="assets/images/kashmir-kargil-travel-by-adarsh-holidays.jpg" alt="">
+                        </a>
+                     </figure>
+                     <div class="package-content-wrap">
+                        <div class="package-content">
+                           <h3>
+                              <a href="#">Kashmir Tour 7Nights - 8 Days</a>
+                           </h3>
+                           <div class="review-area">
+                              <span class="review-text">(443 reviews)</span>
+                              <div class="rating-start" title="Rated 5 out of 5">
+                                 <span style="width: 60%"></span>
+                              </div>
+                           </div>
+                           <p>2N Jammu – 4N Srinagar – 1N Pahalgam</p>
+                           <div class="btn-wrap">
+                              <a href="#" class="button-text width-6">Book Now<i class="fas fa-arrow-right"></i></a>
+
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="btn-wrap text-center">
+            <a href="popular-packages.html" class="button-primary">VIEW ALL PACKAGES&nbsp;<i
+                  class="fa-solid fa-arrow-right" style="font-size: 16px;"></i></a>
+         </div>
+      </div>
+      </div>
+   </section>
+   <!-- packages html end -->
+   <!-- Home special section html start -->
+   <section class="special-section">
+      <div class="container">
+         <div class="section-heading text-center">
+            <div class="row">
+               <div class="col-lg-8 offset-lg-2">
+                  <h5 class="dash-style">Car & Bus Rents</h5>
+                  <h2>Rental Packages</h2>
+                  <p>For hassle-free travel, Adarsh Holidays provides a complete rental package that includes both
+                     big buses and cosy vehicles. Experience a flawless travel with our superior cars,
+                     knowledgeable drivers, and unrivalled service all included in one reasonable package.</p>
+               </div>
+            </div>
+         </div>
+         <div class="special-inner">
+            <div class="row">
+               <div class="col-md-6 col-lg-4">
+                  <div class="special-item">
+                     <figure class="special-img">
+                        <img src="assets/images/car-on-rents.jpg" alt="">
+                     </figure>
+                     <div class="special-content">
+                        <h3>
+                           <a href="#">Experience the natural beauty of glacier</a>
+                        </h3>
+                        <div class="package-price"> Price: <del>$1500</del>
+                           <ins>$1200</ins>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-6 col-lg-4">
+                  <div class="special-item">
+                     <figure class="special-img">
+                        <img src="assets/images/car-bus-on-rents-2.jpg" alt="">
+                     </figure>
+                     <div class="special-content">
+                        <h3>
+                           <a href="#">Trekking to the mountain camp site</a>
+                        </h3>
+                        <div class="package-price"> Price: <del>$1300</del>
+                           <ins>$1105</ins>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-6 col-lg-4">
+                  <div class="special-item">
+                     <figure class="special-img">
+                        <img src="assets/images/bus-on-rents.jpg" alt="">
+                     </figure>
+                     <div class="special-content">
+                        <h3>
+                           <a href="#">Sunset view of beautiful lakeside city</a>
+                        </h3>
+                        <div class="package-price"> Price: <del>$1800</del>
+                           <ins>$1476</ins>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="btn-wrap text-center">
+               <a href="#" class="button-primary">VIEW ALL RENTAL PACKAGES&nbsp;<i class="fa-solid fa-arrow-right"
+                     style="font-size: 16px;"></i></a>
+            </div>
+         </div>
+   </section>
+   <!-- special html end -->
+   <br><br>
+   <!-- Home special section html start -->
+   <section class="best-section">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-5">
+               <div class="section-heading">
+                  <h5 class="dash-style">OUR TOUR GALLERY</h5>
+                  <h2>BEST TRAVELER'S SHARED PHOTOS</h2>
+                  <p>Explore the globe from the perspective of travellers with Adarsh Holidays! Take a visual trip
+                     via our most popular images, which were submitted by eager travellers. via our carefully
+                     chosen selection of priceless moments. </p>
+               </div>
+               <figure class="gallery-img">
+                  <img src="assets/images/BEST-TRAVELER'S-SHARED-PHOTOS-2.jpg" alt="">
+               </figure>
+            </div>
+            <div class="col-lg-7">
+               <div class="row">
+                  <div class="col-sm-6">
+                     <figure class="gallery-img">
+                        <img src="assets/images/BEST-TRAVELER'S-SHARED-PHOTOS-1.jpg" alt="">
+                     </figure>
+                  </div>
+                  <div class="col-sm-6">
+                     <figure class="gallery-img">
+                        <img src="assets/images/BEST-TRAVELER'S-SHARED-PHOTOS-4.jpg" alt="">
+                     </figure>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-12">
+                     <figure class="gallery-img">
+                        <img src="assets/images/BEST-TRAVELER'S-SHARED-PHOTOS-3.jpg" alt="">
+                     </figure>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!-- best html end -->
+   <!-- Home blog section html start -->
+   <!-- <section class="blog-section">
+            <div class="container">
+               <div class="section-heading text-center">
+                  <div class="row">
+                     <div class="col-lg-8 offset-lg-2">
+                        <h5 class="dash-style">FROM OUR BLOG</h5>
+                        <h2>OUR RECENT POSTS</h2>
+                        <p>Mollit voluptatem perspiciatis convallis elementum corporis quo veritatis aliquid blandit,
+                           blandit torquent, odit placeat. Adipiscing repudiandae eius cursus? Nostrum magnis maxime
+                           curae placeat.</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-md-6 col-lg-4">
+                     <article class="post">
+                        <figure class="feature-image">
+                           <a href="#">
+                              <img src="assets/images/img17.jpg" alt="">
+                           </a>
+                        </figure>
+                        <div class="entry-content">
+                           <h3>
+                              <a href="#">Life is a beautiful journey not a destination</a>
+                           </h3>
+                           <div class="entry-meta">
+                              <span class="byline">
+                                 <a href="#">Demoteam</a>
+                              </span>
+                              <span class="posted-on">
+                                 <a href="#">August 17, 2021</a>
+                              </span>
+                              <span class="comments-link">
+                                 <a href="#">No Comments</a>
+                              </span>
+                           </div>
+                        </div>
+                     </article>
+                  </div>
+                  <div class="col-md-6 col-lg-4">
+                     <article class="post">
+                        <figure class="feature-image">
+                           <a href="#">
+                              <img src="assets/images/img18.jpg" alt="">
+                           </a>
+                        </figure>
+                        <div class="entry-content">
+                           <h3>
+                              <a href="#">Take only memories, leave only footprints</a>
+                           </h3>
+                           <div class="entry-meta">
+                              <span class="byline">
+                                 <a href="#">Demoteam</a>
+                              </span>
+                              <span class="posted-on">
+                                 <a href="#">August 17, 2021</a>
+                              </span>
+                              <span class="comments-link">
+                                 <a href="#">No Comments</a>
+                              </span>
+                           </div>
+                        </div>
+                     </article>
+                  </div>
+                  <div class="col-md-6 col-lg-4">
+                     <article class="post">
+                        <figure class="feature-image">
+                           <a href="#">
+                              <img src="assets/images/img19.jpg" alt="">
+                           </a>
+                        </figure>
+                        <div class="entry-content">
+                           <h3>
+                              <a href="#">Journeys are best measured in new friends</a>
+                           </h3>
+                           <div class="entry-meta">
+                              <span class="byline">
+                                 <a href="#">Demoteam</a>
+                              </span>
+                              <span class="posted-on">
+                                 <a href="#">August 17, 2021</a>
+                              </span>
+                              <span class="comments-link">
+                                 <a href="#">No Comments</a>
+                              </span>
+                           </div>
+                        </div>
+                     </article>
+                  </div>
+               </div>
+            </div>
+         </section> -->
+   <!-- blog html end -->
+   <!-- Home testimonial section html start -->
+   <br>
+   <div class="testimonial-section" style="background-image: url(assets/images/img23.jpg);">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+               <div class="testimonial-inner testimonial-slider">
+                  <div class="testimonial-item text-center">
+                     <figure class="testimonial-img">
+                        <img src="assets/images/sneha-Pal-tourist-of-adarsh-holidays.jpg" alt="">
+                     </figure>
+                     <div class="testimonial-content">
+                        <p>" Our ideal trip became a reality thanks to Adarsh Holidays! Our trip was amazing
+                           because of the attentive personal service and well-organized arrangements. Bravo to the
+                           group for a job well done. We will always treasure the memories! "</p>
+                        <cite> Sneha Pal <span class="company">Goa Tourist</span>
+                        </cite>
+                     </div>
+                  </div>
+                  <div class="testimonial-item text-center">
+                     <figure class="testimonial-img">
+                        <img src="assets/images/raj-shetty-tourist-of-adarsh-holidays.jpg" alt="">
+                     </figure>
+                     <div class="testimonial-content">
+                        <p>" We were pleasantly surprised by Adarsh Holidays! Their professionalism and knowledge
+                           made the trip stress-free. Every moment was enchanting, encompassing both culinary
+                           treats and cultural marvels. We appreciate you creating the ideal Indian vacation for
+                           us! "</p>
+                        <cite> Raj Shetty <span class="company">Jaipur Tourist</span>
+                        </cite>
+                     </div>
+                  </div>
+                  <div class="testimonial-item text-center">
+                     <figure class="testimonial-img">
+                        <img src="assets/images/ravi-jaiswal-tourist-of-adarsh-holidays.jpg" alt="">
+                     </figure>
+                     <div class="testimonial-content">
+                        <p>" Adarsh Holidays made our vacation into an incredible adventure! We were made to feel
+                           at ease by the careful planning and pleasant reception. It was a pleasure to explore
+                           India's splendour as a result of your team's efforts. We thank you for the wonderful
+                           memories! "</p>
+                        <cite> Ravi Jaiswal <span class="company">Manali Tourist</span>
+                        </cite>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- testimonial html end -->
+   <!-- Home contact details section html start -->
+   <!-- <section class="contact-section">
+            <div class="container">
+               <div class="row">
+                  <div class="col-lg-4">
+                     <div class="contact-img"
+                        style="background-image: url(assets/images/contact-with-adarsh-holidays.jpg);">
+                     </div>
+                  </div>
+                  <div class="col-lg-8">
+                     <div class="contact-details-wrap">
+                        <div class="row">
+                           <div class="col-sm-4">
+                              <div class="contact-details">
+                                 <div class="contact-icon">
+                                    <img src="assets/images/icon12.png" alt="">
+                                 </div>
+                                 <ul>
+                                    <li>
+                                       <a href="#">support@adarshholidays.com</a>
+                                    </li>
+                                    <li>
+                                       <a href="#">info@adarshholidays.com</a>
+                                    </li>
+                                    <li>
+                                       <a href="#">collab@adarshholidays.com</a>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="contact-details">
+                                 <div class="contact-icon">
+                                    <img src="assets/images/icon13.png" alt="">
+                                 </div>
+                                 <ul>
+                                    <li>
+                                       <a href="#">+91 97027 64500</a>
+                                    </li>
+                                    <li>
+                                       <a href="#">+91 97694 74093</a>
+                                    </li>
+                                    <li>
+                                       <a href="#">+91 72083 80857</a>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="contact-details">
+                                 <div class="contact-icon">
+                                    <img src="assets/images/icon14.png" alt="">
+                                 </div>
+                                 <ul>
+                                    <li> Malvani, Malad West</li>
+                                    <li> Mumbai - 400095</li>
+                                    <li> Maharashtra </li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section> -->
+   <!--  contact details html end -->
+   <!-- <div class="overlay-form" id="overlay"></div>
+         <div id="bookingForm" class="popup-form">
+            <span class="close-icon"><i class="fas fa-times"></i></span>
+            <h2>Car Rental Booking Form</h2>
+            <form method="post"
+               action="https://script.google.com/macros/s/AKfycbwH_C8rSveNYN6uY__WaLgQdZU9zjQME8GtpXpP0ZPfnJlZWxN3Ec1KQ4ZoPK2yBdjGMw/exec"
+               name="contact-form" id="carBookingForm">
+               <label for="name">Name:</label>
+               <input type="text" id="name" name="user-name" required><br>
+               <label for="Email">Email ID:</label>
+               <input type="email" id="Email" name="user-email-id" required><br>
+               <label for="phone">Phone No.:</label>
+               <input type="tel" id="Phone" name="user-phone-number" required><br>
+               <label for="pickupDate">Date:</label>
+               <input type="date" id="Pickup" name="user-pickup-date" required><br>
+               <label for="car-type">Car Type:</label>
+               <select id="car-type" name="user-select-type" required>
+                  <option value="4 Seater A/C Car">4 Seater A/C Car</option>
+                  <option value="6 Seater A/C Car">6 Seater A/C Car</option>
+                  <option value="4 Seater Non A/C Car">4 Seater Non A/C Car</option>
+                  <option value="6 Seater Non A/C Car">6 Seater Non A/C Car</option>
+               </select><br>
+               <button type="submit" class="button-primary-1" id="submit">Submit</button>
+            </form>
+         </div>
+         <div id="successPopup" class="popup-form">
+            <span class="close-icon"><i class="fas fa-times"></i></span>
+            <h2>Booking Successful!</h2>
+            <p>Thank you for choosing our car rental service. We'll contact you shortly.</p>
+         </div> -->
+   <div class="overlay-form" id="overlay" onclick="closePopup()"></div>
+   <div id="bookingForm" class="popup-form">
+      <span class="close-icon" onclick="closePopup()"><i class="fas fa-times"></i></span>
+      <h2>Car Rental Booking Form</h2>
+      <form onsubmit="submitForm(); return false;">
+         <label for="name">Name:</label>
+         <input type="text" id="name" name="user-name" required><br>
+         <label for="Email">Email ID:</label>
+         <input type="email" id="Email" name="user-email-id" required><br>
+         <label for="phone">Phone No.:</label>
+         <input type="tel" id="Phone" name="user-phone-number" required><br>
+         <label for="pickupDate">Date:</label>
+         <input type="date" id="Pickup" name="user-pickup-date" required><br>
+         <label for="car-type">Car Type:</label>
+         <select id="car-type" name="user-select-type" required>
+            <option value="4 Seater A/C Car">4 Seater A/C Car</option>
+            <option value="6 Seater A/C Car">6 Seater A/C Car</option>
+            <option value="4 Seater Non A/C Car">4 Seater Non A/C Car</option>
+            <option value="6 Seater Non A/C Car">6 Seater Non A/C Car</option>
+         </select><br>
+         <button type="submit" class="button-primary-1" id="submit">Submit</button>
+      </form>
+   </div>
+   <div id="successPopup" class="popup-form">
+      <span class="close-icon" onclick="closePopup()"><i class="fas fa-times"></i></span>
+      <h2>Booking Successful!</h2>
+      <p>Thank you for choosing our car rental service. We'll contact you shortly.</p>
+   </div>
+   </main>
+   <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+   <div class="elfsight-app-9b25360d-2020-4ad1-91aa-488c6ba9aed4" data-elfsight-app-lazy></div>
+   <footer id="colophon" class="site-footer footer-primary">
+      <div class="top-footer">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-3 col-md-6">
+                  <aside class="widget widget_text">
+                     <h3 class="widget-title"> About Us </h3>
+                     <div class="award-img">
+                        <a href="#"><img src="../assets/images/adarsh-holidays-rectange-logo.webp"></a>
+                     </div>
+                     <div class="textwidget widget-text"> Your passport to personalized, affordable travel
+                        experiences. Tailor-made adventures for individuals and groups. Hassle-free, seamless
+                        journeys. </div>
+                  </aside>
+               </div>
+               <div class="col-lg-3 col-md-6">
+                  <aside class="widget widget_text">
+                     <h3 class="widget-title">CONTACT INFORMATION</h3>
+                     <div class="textwidget widget-text"> Kindly Contact us through below details. <ul>
+                           <li>
+                              <a href="tel:7208380857">
+                                 <i class="fas fa-phone-alt"></i> +91 72083 80857 </a>
+                           </li>
+                           <li>
+                              <a href="mailto:contact.adarshholidays@gmail.com">
+                                 <i class="fas fa-envelope"></i> adarshholidays@gmail.com</a>
+                           </li>
+                           <li>
+                              <a href="https://maps.app.goo.gl/cm4ikgGjkdHwTKoB7" target="_blank">
+                                 <i class="fas fa-map-marker-alt"></i> Malvani Malad (West), Mumbai, Maharashtra</a>
+                           </li>
+                        </ul>
+                     </div>
+                  </aside>
+               </div>
+               <div class="col-lg-3 col-md-6">
+                  <aside class="widget widget_text">
+                     <h3 class="widget-title">Quick Links</h3>
+                     <ul>
+                        <li>
+                           <a href="index.html"><i class="fa-solid fa-square-arrow-up-right"></i>
+                              Home</a>
+                        </li>
+                        <li>
+                           <a href="/frontend/pages/other-pages/about.html"><i
+                                 class="fa-solid fa-square-arrow-up-right"></i>
+                              About Us</a>
+                        </li>
+                        <li>
+                           <a href="more-tour-destination.html"><i class="fa-solid fa-square-arrow-up-right"></i>
+                              Tours </a>
+                        </li>
+                        <!-- <li>
+                           <a href="more-all-hotel-packages.html"><i class="fa-solid fa-square-arrow-up-right"></i>
+                              Hotels
+                              Booking</a>
+                        </li> -->
+                        <li>
+                           <a href="/frontend/pages/other-pages/car-rental.html"><i
+                                 class="fa-solid fa-square-arrow-up-right"></i> Car
+                              Rental
+                           </a>
+                        </li>
+                        <li>
+                           <a href="/frontend/pages/other-pages/bus-rental.html"><i
+                                 class="fa-solid fa-square-arrow-up-right"></i> Bus
+                              Rental
+                           </a>
+                        </li>
+                        <li>
+                           <a href="/frontend/pages/other-pages/contact.html"><i
+                                 class="fa-solid fa-square-arrow-up-right"></i>
+                              Contact </a>
+                        </li>
+                     </ul>
+                  </aside>
+               </div>
+               <div class="col-lg-3 col-md-6">
+                  <aside class="widget widget_newslatter">
+                     <h3 class="widget-title">SUBSCRIBE US</h3>
+                     <div class="widget-text"> Share your Emails to get Personalized and affordable tour offers.
+                     </div>
+                     <form method="post"
+                        action="https://script.google.com/macros/s/AKfycbymNpS6Weqz8AE2MtjcJWQHNZ6SfdJA3R3gKLBUxMCmKxKzv_dzwckRpSC-LrVmhVZn/exec"
+                        name="contact-form" class="newslatter-form">
+                        <input type="email" name="Emails" placeholder="Your Email.." required>
+                        <input type="submit" class="submit-btn" value="SUBSCRIBE NOW">
+                     </form>
+                  </aside>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="buttom-footer">
+         <div class="container">
+            <div class="row align-items-center">
+               <div class="col-md-5">
+                  <div class="footer-menu">
+                     <ul>
+                        <li>
+                           <a href="privacy-policy.html"><i class="fa-solid fa-square-arrow-up-right"
+                                 style="color:#e18903;"></i>&nbsp;Privacy Policy</a>
+                        </li>
+                        <li>
+                           <a href="terms-and-conditions.html"><i class="fa-solid fa-square-arrow-up-right"
+                                 style="color:#e18903;"></i>&nbsp;Terms & Condition</a>
+                        </li>
+                        <li>
+                           <a href="https://forms.gle/6mLhDthqYi5A6xF86" target="_blank"><i
+                                 class="fas-sharp fa-regular fa-globe" style="color:#e18903;"></i>&nbsp;Need a
+                              Website?</a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="col-md-2 text-center">
+                  <div class="footer-logo">
+                     <a href="#"><img src="assets/images/travele-logo.png" alt=""></a>
+                  </div>
+               </div>
+               <div class="col-md-5">
+                  <div class="copy-right text-right">Copyright © 2024 Adarsh Holidays. All rights reserveds</div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </footer>
+   <!-- custom search field html -->
+   <div class="header-search-form">
+      <div class="container">
+         <div class="header-search-container">
+            <form class="search-form" role="search" method="get">
+               <input type="text" name="s" placeholder="Enter your text...">
+            </form>
+            <a href="#" class="search-close">
+               <i class="fas fa-times"></i>
+            </a>
+         </div>
+      </div>
+   </div>
+   <!-- header html end -->
+   </div>
+   <!-- JavaScript -->
+   <script src="/frontend/assets/js/jquery.js"></script>
+   <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+   <script src="/frontend/assets/vendors/bootstrap/js/bootstrap.min.js"></script>
+   <script src="/frontend/assets/vendors/jquery-ui/jquery-ui.min.js"></script>
+   <script src="/frontend/assets/vendors/countdown-date-loop-counter/loopcounter.js"></script>
+   <script src="/frontend/assets/js/jquery.counterup.js"></script>
+   <script src="/frontend/assets/vendors/modal-video/jquery-modal-video.min.js"></script>
+   <script src="/frontend/assets/vendors/masonry/masonry.pkgd.min.js"></script>
+   <script src="/frontend/assets/vendors/lightbox/dist/js/lightbox.min.js"></script>
+   <script src="/frontend/assets/vendors/slick/slick.min.js"></script>
+   <script src="/frontend/assets/js/jquery.slicknav.js"></script>
+   <script src="/frontend/assets/js/custom.min.js"></script>
+   <script src="/frontend/assets/js/main-booking-form.js"></script>
+   <script src="/frontend/assets/js/car-rental-booking-form.js"></script>
+   <script src="/frontend/assets/js/emails.js"></script>
+   <script>
+      document.getElementById("search-form").addEventListener("submit", function (event) {
+         event.preventDefault();
+
+         const fromCity = document.getElementById("from").value.trim();
+         const toCity = document.getElementById("to").value.trim();
+         const departureDate = document.getElementById("departure-date").value;
+         const returnDate = document.getElementById("return-date").value || "";
+         const travellers = document.getElementById("travellers").value;
+         const travelClass = document.getElementById("traveller-class").value;
+
+         // Construct the query structure
+         const queryString = `itinerary=${fromCity}-${toCity}-${departureDate}` +
+            `&tripType=${returnDate ? "R" : "O"}` +
+            `&paxType=A-${travellers}_C-0_I-0` +
+            `&intl=false&cabinClass=${travelClass}&lang=eng`;
+
+         // Redirect to results page
+         window.location.href = `flight-results.html?${queryString}`;
+      });
+   </script>
+   <script src="/frontend/user-dashboard/script.js"></script>
+</body>
+
+</html>

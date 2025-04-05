@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="rzp-button1">Pay Now</button>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        var options = {
+            "key": "rzp_test_6b6SwSwFgzwZnm", // Replace with your Razorpay Key ID
+            "amount": 750000, // Amount in paisa (₹7500.00)
+            "currency": "INR",
+            "name": "Adarsh Holidays",
+            "description": "Flight Booking",
+            "order_id": "order_Q8mBwtqBMrRzwb", // Use the Razorpay Order ID from your backend
+            "handler": function (response) {
+                alert("Payment Successful!");
+                console.log(response);
+                // Send response.razorpay_payment_id, response.razorpay_order_id, response.razorpay_signature to your backend for verification
+            },
+            "prefill": {
+                "name": "John Doe",
+                "email": "johndoe@example.com",
+                "contact": "9999999999"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+
+        var rzp1 = new Razorpay(options);
+        document.getElementById('rzp-button1').onclick = function (e) {
+            rzp1.open();
+            e.preventDefault();
+        }
+    </script>
+
+
+</body>
+
+</html>

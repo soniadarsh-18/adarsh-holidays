@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Adarsh Holidays</title>
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="/frontend/assets/images/plane-travel-icon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Inter", sans-serif;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+            background: #f5f5f5;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .image-section {
+            width: 65%;
+            background: url("https://www.aig.ie/content/aig/emea/ie/en/home/solutions/our-blog/first-hand-guide-to-solo-travelling/_jcr_content/root/responsivegrid/responsivegrid_copy_/container_copy_copy_/container/image.coreimg.jpeg/1733840042876/solo-traveling-1-1440x720.jpeg") no-repeat center center/cover;
+        }
+
+        .logo {
+            width: 220px;
+            margin-bottom: 20px;
+        }
+
+        .form-section {
+            width: 35%;
+            padding: 60px;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section h2 {
+            font-weight: 600;
+            font-size: 28px;
+            line-height: normal;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-section input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .form-section button {
+            width: 100%;
+            background: #f90;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            border-radius: 12px;
+        }
+
+        .form-section .bottom-text {
+            margin-top: 20px;
+            font-size: 16px;
+            text-align: center;
+            color: #555;
+        }
+
+        .form-section .bottom-text a {
+            color: #f90;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .form-section .bottom-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* Smooth, professional input styles */
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 16px;
+            outline: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: #333;
+            transition: all 0.3s ease;
+            border: 1px solid #ccc;
+        }
+
+        /* Input focus effect */
+        input:focus {
+            border-color: rgba(255, 153, 0, 0.8);
+            box-shadow: 0 4px 15px rgba(255, 153, 0, 0.3);
+            transform: scale(1.03);
+        }
+
+        /* Password input wrapper */
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper input {
+            padding-right: 45px;
+        }
+
+        /* Eye icon for password visibility */
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 40%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #888;
+            transition: color 0.3s ease;
+        }
+
+        .toggle-password:hover {
+            color: #000;
+        }
+
+        .toggle-password:active {
+            color: #000;
+        }
+
+        /* Modern button design */
+        button {
+            width: 100%;
+            background: linear-gradient(135deg, #ff9900, #ff7300);
+            border: none;
+            padding: 16px;
+            font-size: 17px;
+            color: #fff;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            height: 60px;
+        }
+
+        /* Button hover effect */
+        button:hover {
+            background: linear-gradient(135deg, #ff7300, #ff5500);
+            box-shadow: 0 5px 20px rgba(255, 153, 0, 0.5);
+        }
+
+        /* Button click effect */
+        button:active {
+            transform: scale(0.96);
+        }
+
+        /* Success message */
+        .success-message {
+            display: none;
+            color: #28a745;
+            font-size: 16px;
+            text-align: center;
+            margin-top: 15px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* Error message */
+        .error-message {
+            color: red;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 15px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                display: flex;
+                height: 100vh;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .container {
+                flex-direction: column;
+                height: 100vh;
+                width: 100%;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .image-section {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: -1;
+            }
+
+            .form-section {
+                width: 90%;
+                max-width: 400px;
+                min-height: 450px;
+                padding: 30px;
+                background: white;
+                border-radius: 15px;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            }
+
+            h2 {
+                margin-top: 20px;
+            }
+
+            .logo {
+                display: block;
+                margin: 0 auto;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-section {
+                width: 90%;
+                padding: 20px;
+                min-height: 420px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            input {
+                padding: 12px;
+                font-size: 14px;
+            }
+
+            button {
+                padding: 14px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="image-section"></div>
+        <div class="form-section">
+            <a href="login.html">
+                <img src="../assets/images/adarsh-holidays-rectange-logo.webp" alt="Adarsh Holidays Logo"
+                    class="logo" />
+            </a>
+            <h2>Login to your account</h2>
+
+            <form id="loginForm" autocomplete="off">
+                <div id="errorContainer" class="error-message"></div>
+
+                <input type="email" id="email" placeholder="Email Address" autocomplete="off" required />
+
+                <div class="password-wrapper">
+                    <input type="password" id="password" placeholder="Password" autocomplete="new-password" required />
+                    <span class="toggle-password" onclick="togglePassword('password')">
+                        <i class="fas fa-eye-slash"></i>
+                    </span>
+                </div>
+
+                <button type="submit" id="loginButton">Login</button>
+                <p class="success-message" id="successMessage">
+                    ✅ Login successful! Redirecting...
+                </p>
+            </form>
+
+            <p class="bottom-text">
+                <a href="forgot-password.html">Forgot password?</a>
+            </p>
+            <p class="bottom-text">
+                Don't have an account? <a href="authentication/register.html">Sign Up now</a>
+            </p>
+            <p class="bottom-text"><a href="/frontend/index.html">Back to home</a></p>
+        </div>
+    </div>
+
+    <script>
+        // ✅ Function to toggle password visibility
+        function togglePassword(id) {
+            const input = document.getElementById(id);
+            const icon = input.nextElementSibling.querySelector("i");
+            input.type = input.type === "password" ? "text" : "password";
+            icon.classList.toggle("fa-eye-slash");
+            icon.classList.toggle("fa-eye");
+        }
+
+        // ✅ Login Form Submission with Security Enhancements
+        document
+            .getElementById("loginForm")
+            .addEventListener("submit", async (event) => {
+                event.preventDefault();
+
+                const email = document.getElementById("email").value.trim();
+                const password = document.getElementById("password").value.trim();
+                const loginButton = document.getElementById("loginButton");
+                const successMessage = document.getElementById("successMessage");
+                const errorContainer = document.getElementById("errorContainer");
+
+                // ✅ Reset messages & disable button during login attempt
+                errorContainer.textContent = "";
+                successMessage.style.display = "none";
+                loginButton.textContent = "Logging in...";
+                loginButton.disabled = true;
+
+                try {
+                    console.log("📢 Sending login request...");
+
+                    const response = await fetch("http://localhost:5000/api/auth/login", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email, password }),
+                        credentials: "include",
+                    });
+
+
+                    const data = await response.json();
+                    console.log("🔹 Server Response:", data);
+
+                    if (response.ok) {
+                        console.log("✅ Login Successful:", data);
+
+                        // ✅ Store Token in Local Storage (Frontend Authentication)
+                        localStorage.setItem("token", data.token);
+                        localStorage.setItem("role", data.role);
+
+                        // ✅ Store Token in HTTP-Only Secure Cookie (Backend Authentication)
+                        document.cookie = `token=${data.token}; path=/; max-age=7200; secure=${window.location.protocol === "https:"}; samesite=strict;`;
+
+                        // ✅ UI feedback for successful login
+                        successMessage.style.display = "block";
+                        loginButton.textContent = "Login Successful!";
+                        loginButton.style.background = "green";
+
+                        // ✅ Redirect to appropriate dashboard
+                        setTimeout(() => {
+                            if (email === "adarshholidayss@gmail.com" || data.role === "admin") {
+                                window.location.href = "/admin/dashboard.html";
+                            } else {
+                                window.location.href = "/frontend/user-dashboard/index.html"; // Go up one level from authentication folder
+                            }
+                        }, 5000);
+                    } else {
+                        console.error("❌ Login Failed:", data.message);
+                        errorContainer.textContent = data.message || "Login failed!";
+                        resetLoginButton();
+                    }
+                } catch (error) {
+                    console.error("❌ Login Error:", error);
+                    errorContainer.textContent = "Failed to connect to the server.";
+                    resetLoginButton();
+                }
+            });
+
+        // ✅ Function to reset the login button after failure
+        function resetLoginButton() {
+            const loginButton = document.getElementById("loginButton");
+            loginButton.textContent = "Login";
+            loginButton.style.background = "#f90";
+            loginButton.disabled = false;
+        }
+
+    </script>
+</body>
+
+</html>

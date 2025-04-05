@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up | Adarsh Holidays</title>
+    <!-- favicon -->
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="/frontend/assets/images/plane-travel-icon.ico"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <script type="module" src="firebase-auth.js"></script>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Inter", sans-serif;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100%;
+        background: url("/frontend/assets/images/place-1.webp") no-repeat center
+          center/cover;
+        position: relative;
+      }
+
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+        z-index: 1;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100%;
+        position: relative;
+      }
+
+      .form-section {
+        width: 35%;
+        max-width: 520px;
+        padding: 40px;
+        background: white; /* Slight transparency */
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .logo {
+        width: 220px;
+        margin: 0 auto 20px;
+        display: block;
+        margin-bottom: 30px;
+      }
+
+      h2 {
+        font-weight: 600;
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      /* Smooth, professional input styles */
+      input {
+        width: 100%;
+        padding: 14px;
+        margin-bottom: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        font-size: 16px;
+        outline: none;
+        background: rgba(255, 255, 255, 0.1);
+        color: #333;
+        transition: all 0.3s ease;
+        border: 1px solid #ccc;
+      }
+
+      /* Input focus effect */
+      input:focus {
+        border-color: rgba(255, 153, 0, 0.8);
+        box-shadow: 0 4px 15px rgba(255, 153, 0, 0.3);
+        transform: scale(1.03);
+      }
+
+      /* Password input wrapper */
+      .password-wrapper {
+        position: relative;
+      }
+
+      .password-wrapper input {
+        padding-right: 45px;
+      }
+
+      /* Eye icon for password visibility */
+      .toggle-password {
+        position: absolute;
+        right: 15px;
+        top: 40%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #888;
+        transition: color 0.3s ease;
+      }
+
+      .toggle-password:hover {
+        color: #000;
+      }
+
+      .toggle-password:active {
+        color: #000;
+      }
+
+      /* Modern button design */
+      button {
+        width: 100%;
+        background: linear-gradient(135deg, #ff9900, #ff7300);
+        border: none;
+        padding: 16px;
+        font-size: 17px;
+        color: #fff;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        height: 60px;
+      }
+
+      /* Button hover effect */
+      button:hover {
+        background: linear-gradient(135deg, #ff7300, #ff5500);
+        box-shadow: 0 5px 20px rgba(255, 153, 0, 0.5);
+      }
+
+      /* Button click effect */
+      button:active {
+        transform: scale(0.96);
+      }
+
+      /* Success message */
+      .success-message {
+        display: none;
+        color: #28a745;
+        font-size: 16px;
+        text-align: center;
+        margin-top: 15px;
+        animation: fadeIn 0.5s ease-in-out;
+      }
+
+      /* Error message */
+      .error-message {
+        color: red;
+        font-size: 14px;
+        text-align: center;
+        margin-bottom: 15px;
+        animation: fadeIn 0.5s ease-in-out;
+      }
+
+      /* Keyframe Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .bottom-text {
+        margin-top: 20px;
+        font-size: 16px;
+        text-align: center;
+        color: #555;
+      }
+
+      .bottom-text a {
+        color: #f90;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .bottom-text a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          display: flex;
+          height: 100vh;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .container {
+          flex-direction: column;
+          height: 100vh;
+          width: 100%;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .image-section {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: -1;
+        }
+
+        .form-section {
+          width: 90%;
+          max-width: 400px;
+          min-height: 450px;
+          padding: 30px;
+          background: white;
+          border-radius: 15px;
+          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+          margin-top: 20px;
+        }
+
+        .logo {
+          display: block;
+          margin: 0 auto;
+          max-width: 100%;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .form-section {
+          width: 90%;
+          padding: 20px;
+          min-height: 420px;
+        }
+
+        h2 {
+          font-size: 22px;
+        }
+
+        input {
+          padding: 12px;
+          font-size: 14px;
+        }
+
+        button {
+          padding: 14px;
+          font-size: 15px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="image-section"></div>
+      <div class="form-section">
+        <a href="authentication/register.html"
+          ><img
+            src="../assets/images/adarsh-holidays-rectange-logo.webp"
+            alt="Adarsh Holidays Logo"
+            class="logo"
+        /></a>
+        <h2>Fill up the details!</h2>
+
+        <form id="registerForm" autocomplete="off">
+          <div id="errorContainer" class="error-message"></div>
+
+          <!-- Dummy hidden input to prevent autofill -->
+          <input
+            type="text"
+            style="display: none"
+            name="fakeusernameremembered"
+            autocomplete="off"
+          />
+          <input
+            type="password"
+            style="display: none"
+            name="fakepasswordremembered"
+            autocomplete="off"
+          />
+
+          <input
+            type="text"
+            id="fullName"
+            name="fullNameRandom"
+            placeholder="Full Name"
+            autocomplete="off"
+            required
+          />
+          <input
+            type="email"
+            id="email"
+            name="emailRandom"
+            placeholder="Email Address"
+            autocomplete="off"
+            required
+          />
+
+          <div class="password-wrapper">
+            <input
+              type="password"
+              id="password"
+              name="passwordRandom"
+              placeholder="Password"
+              autocomplete="new-password"
+              required
+            />
+            <span class="toggle-password" onclick="togglePassword('password')">
+              <i class="fas fa-eye-slash"></i>
+            </span>
+          </div>
+
+          <div class="password-wrapper">
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPasswordRandom"
+              placeholder="Confirm Password"
+              autocomplete="new-password"
+              required
+            />
+            <span
+              class="toggle-password"
+              onclick="togglePassword('confirmPassword')"
+            >
+              <i class="fas fa-eye-slash"></i>
+            </span>
+          </div>
+
+          <button type="submit" id="registerButton">Sign Up</button>
+          <p class="success-message" id="successMessage">
+            ✅ Account created! Please verify via the email sent.
+          </p>
+        </form>
+
+        <p class="bottom-text">
+          Already have an account? <a href="login.html">Log in now</a>
+        </p>
+        <p class="bottom-text">
+          <a href="/frontend/index.html">Back to home</a>
+        </p>
+      </div>
+    </div>
+
+    <script>
+      // Function to toggle password visibility
+      function togglePassword(id) {
+        const input = document.getElementById(id);
+        const icon = input.nextElementSibling.querySelector("i");
+        input.type = input.type === "password" ? "text" : "password";
+        icon.classList.toggle("fa-eye-slash");
+        icon.classList.toggle("fa-eye");
+      }
+
+      // Prevent autofill by dynamically renaming input fields
+      window.onload = function () {
+        ["fullName", "email", "password", "confirmPassword"].forEach((id) => {
+          document.getElementById(id).setAttribute("name", id + Math.random());
+        });
+      };
+
+      // Function to check if the email already exists
+      async function checkEmail() {
+        const email = document.getElementById("email").value;
+        const emailError = document.getElementById("emailError");
+
+        if (!email) return;
+
+        try {
+          const response = await fetch(
+            `http://localhost:5000/api/auth/check-email?email=${email}`
+          );
+          const data = await response.json();
+
+          if (response.status === 400) {
+            emailError.textContent = "❌ Email already exists. Try logging in.";
+          } else {
+            emailError.textContent = "";
+          }
+        } catch (error) {
+          emailError.textContent = "❌ Failed to check email.";
+        }
+      }
+
+      // Form submission handler
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          const fullName = document.getElementById("fullName").value;
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+          const confirmPassword =
+            document.getElementById("confirmPassword").value;
+          const errorContainer = document.getElementById("errorContainer");
+          const successMessage = document.getElementById("successMessage");
+          const registerButton = document.getElementById("registerButton");
+
+          errorContainer.textContent = ""; // Clear previous errors
+          successMessage.style.display = "none"; // Hide success message
+
+          if (password !== confirmPassword) {
+            errorContainer.textContent = "❌ Passwords do not match!";
+            return;
+          }
+
+          registerButton.textContent = "Registering...";
+          registerButton.disabled = true;
+
+          try {
+            const response = await fetch(
+              "http://localhost:5000/api/auth/register",
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  fullName,
+                  email,
+                  password,
+                  confirmPassword,
+                }),
+              }
+            );
+
+            const data = await response.json();
+
+            if (response.status === 201) {
+              successMessage.style.display = "block";
+              registerButton.textContent = "Account Created!";
+              registerButton.style.background = "green";
+
+              setTimeout(() => {
+                window.location.href = "login.html";
+              }, 2000);
+            } else {
+              errorContainer.textContent = `❌ ${
+                data.message || "Registration failed!"
+              }`;
+              registerButton.textContent = "Sign Up";
+              registerButton.disabled = false;
+            }
+          } catch (error) {
+            errorContainer.textContent = "❌ Failed to connect to the server.";
+            registerButton.textContent = "Sign Up";
+            registerButton.disabled = false;
+          }
+        });
+    </script>
+  </body>
+</html>
