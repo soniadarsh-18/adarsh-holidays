@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login | Adarsh Holidays</title>
   <!-- favicon -->
-  <link rel="icon" type="image/x-icon" href="/frontend/assets/images/plane-travel-icon.ico">
+  <link rel="icon" type="image/x-icon" href="/assets/images/plane-travel-icon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
@@ -24,7 +24,7 @@
       align-items: center;
       height: 100vh;
       width: 100%;
-      background: url("/frontend/assets/images/place-2.jpeg") no-repeat center center/cover;
+      background: url("/assets/images/place-2.jpeg") no-repeat center center/cover;
       position: relative;
     }
 
@@ -400,10 +400,10 @@
         <a href="forgot-password.html">Forgot password?</a>
       </p>
       <p class="bottom-text">
-        Don't have an account? <a href="/frontend/authentication/register.html">Sign Up now</a>
+        Don't have an account? <a href="/authentication/register.html">Sign Up now</a>
       </p>
       <p class="bottom-text">
-        <a href="/frontend/index.html">Back to home</a>
+        <a href="/index.html">Back to home</a>
       </p>
     </div>
   </div>
@@ -471,7 +471,7 @@
               if (email.toLowerCase() === "adarshholidayss@gmail.com" || data.role === "admin") {
                 window.location.href = "/admin/dashboard.html"; // Admin Dashboard
               } else {
-                window.location.href = "/frontend/user-dashboard/index.html"; // User Dashboard
+                window.location.href = "/user-dashboard/index.html"; // User Dashboard
               }
             }, 3000); // Shortened delay to 3 seconds
           } else {

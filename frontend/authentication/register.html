@@ -8,7 +8,7 @@
     <link
       rel="icon"
       type="image/x-icon"
-      href="/frontend/assets/images/plane-travel-icon.ico"
+      href="/assets/images/plane-travel-icon.ico"
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
@@ -34,7 +34,7 @@
         align-items: center;
         height: 100vh;
         width: 100%;
-        background: url("/frontend/assets/images/place-1.webp") no-repeat center
+        background: url("/assets/images/place-1.webp") no-repeat center
           center/cover;
         position: relative;
       }
@@ -374,7 +374,7 @@
           Already have an account? <a href="login.html">Log in now</a>
         </p>
         <p class="bottom-text">
-          <a href="/frontend/index.html">Back to home</a>
+          <a href="/index.html">Back to home</a>
         </p>
       </div>
     </div>
@@ -405,7 +405,7 @@
 
         try {
           const response = await fetch(
-            `http://localhost:5000/api/auth/check-email?email=${email}`
+            `https://adarsh-holidays-backend-production.up.railway.app/api/auth/check-email?email=${email}`
           );
           const data = await response.json();
 
@@ -447,7 +447,7 @@
 
           try {
             const response = await fetch(
-              "http://localhost:5000/api/auth/register",
+              "https://adarsh-holidays-backend-production.up.railway.app/api/auth/register",
               {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },

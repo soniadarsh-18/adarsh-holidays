@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // Logout Function
 function logout() {
   localStorage.removeItem("token"); // Remove token
-  window.location.href = "/frontend/authentication/login.html"; // Redirect to login page
+  window.location.href = "/authentication/login.html"; // Redirect to login page
 }
 
 // Handles auto-scroll when redirected with a section ID
@@ -55,18 +55,18 @@ function setupDropdownNavigation() {
 
       if (!token) {
         // Redirect to login if not logged in
-        window.location.href = "/frontend/authentication/login.html";
+        window.location.href = "/authentication/login.html";
         return;
       }
 
       // Check if user is already on the profile page
       if (
-        window.location.pathname.includes("/frontend/user-dashboard/index.html")
+        window.location.pathname.includes("/user-dashboard/index.html")
       ) {
         scrollToSection(targetId);
       } else {
         // Redirect to profile page with section ID
-        window.location.href = `/frontend/user-dashboard/index.html?section=${targetId}`;
+        window.location.href = `/user-dashboard/index.html?section=${targetId}`;
       }
     });
   });
@@ -140,7 +140,7 @@ function updateNavAuthButton() {
               localStorage.removeItem("userData"); // Remove user data
               localStorage.removeItem("token");
               dropdown.classList.add("hidden"); // Hide dropdown after logout
-              window.location.href = "/frontend/authentication/login.html"; // Redirect to login page
+              window.location.href = "/authentication/login.html"; // Redirect to login page
             });
         }
       })
@@ -148,7 +148,7 @@ function updateNavAuthButton() {
   } else {
     // User is logged out
     authButton.innerHTML = `<i class="fa-solid fa-user"></i>&nbsp;&nbsp;&nbsp;Sign In`;
-    authButton.href = "/frontend/authentication/login.html"; // Redirect to login when clicked
+    authButton.href = "/authentication/login.html"; // Redirect to login when clicked
     authButton.classList.remove("hidden"); // Ensure button is visible
     dropdown.classList.add("hidden"); // Hide dropdown when logged out
   }
@@ -1190,7 +1190,7 @@ function fetchProfilePicture() {
       } else {
         // ✅ Default fallback image for users without a profile picture
         profileImage.src =
-          "/frontend/assets/images/default-user-profile-fallback-image.png";
+          "/assets/images/default-user-profile-fallback-image.png";
         localStorage.removeItem("profilePicture");
       }
     })

@@ -823,7 +823,7 @@ async function searchFlights() {
 
   try {
     const response = await fetch(
-      `http://localhost:5000/api/flights/search?origin=${origin}&destination=${destination}&departureDate=${departureDate}&returnDate=${returnDate}&adults=${adults}&travelClass=${travelClass}`,
+      `https://adarsh-holidays-backend-production.up.railway.app/api/flights/search?origin=${origin}&destination=${destination}&departureDate=${departureDate}&returnDate=${returnDate}&adults=${adults}&travelClass=${travelClass}`,
       {
         method: "POST",
         headers: {
@@ -1113,7 +1113,7 @@ async function bookFlight() {
       passengers: passengers
     };
 
-    const response = await fetch("http://localhost:5000/api/flights/book", {
+    const response = await fetch("https://adarsh-holidays-backend-production.up.railway.app/api/flights/book", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1163,7 +1163,7 @@ async function handlePayment() {
     const amount = parseFloat(window.selectedFlight.price.total); // Original amount in decimal
 
     // Create payment order
-    const orderResponse = await fetch("http://localhost:5000/api/payment/create-order", {
+    const orderResponse = await fetch("https://adarsh-holidays-backend-production.up.railway.app/api/payment/create-order", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1195,7 +1195,7 @@ async function handlePayment() {
         console.log("Payment Response:", response);
 
         // Directly redirect to user profile after payment
-        window.location.href = "/frontend/user-dashboard/index.html";
+        window.location.href = "/user-dashboard/index.html";
       },
       prefill: {
         name: localStorage.getItem("userName") || "Guest",
@@ -1231,7 +1231,7 @@ let allTrains = []; // Store all trains fetched from the API
 // Fetch all trains on page load
 async function fetchTrains() {
   const searchTerm = "Rajdhani"; // Example search term
-  const response = await fetch(`http://localhost:5000/api/trains/search`, {
+  const response = await fetch(`https://adarsh-holidays-backend-production.up.railway.app/api/trains/search`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -1322,7 +1322,7 @@ async function bookTrain(trainId) {
   };
 
   try {
-    const response = await fetch(`http://localhost:5000/api/trains/book`, {
+    const response = await fetch(`https://adarsh-holidays-backend-production.up.railway.app/api/trains/book`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1359,7 +1359,7 @@ async function deleteTrainBooking(bookingId) {
 
   try {
     const response = await fetch(
-      `http://localhost:5000/api/trains/delete/${bookingId}`,
+      `https://adarsh-holidays-backend-production.up.railway.app/api/trains/delete/${bookingId}`,
       {
         method: "DELETE",
         headers: {
