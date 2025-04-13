@@ -271,10 +271,6 @@ async function fetchUserBookings(filterDate = null) {
       },
     });
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch flight bookings.");
-    }
-
     const data = await response.json();
 
     if (data.success) {
