@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     // Send a GET request to fetch the user's profile details
-    const response = await fetch("http://localhost:5000/api/user/profile", {
+    const response = await fetch("https://adarsh-holidays-backend-production.up.railway.app/api/user/profile", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`, // Include token for authentication

@@ -13,20 +13,73 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <link rel="stylesheet" href="/frontend/user-dashboard/styles.css" />
 </head>
 
 <body>
+  <div class="header-background-full-width">
+    <header class="header-container-flex-start-end">
+      <div class="company-logo-brand-identifier">
+        <img src="/assets/images/adarsh-holidays-rectange-logo.webp" class="white-logo" />
+      </div>
+      <div class="mobile-menu-toggle-button" onclick="toggleMenu()">☰</div>
+      <nav class="navigation-links-center-booking" id="navLinks">
+        <a href="/index.html"><i class="fa-solid fa-house"></i>&nbsp; Home</a>
+        <a href="/pages/other-pages/about.html"><i class="fa-solid fa-info-circle"></i>&nbsp; About us</a>
+        <a href="/booking/booking.html" target="_blank"><i class="fa-solid fa-tickets-airline"></i>&nbsp; Book your
+          ticket</a>
+        <!-- <a href="#"><i class="fa-solid fa-bus"></i>&nbsp; Bus</a>
+        <a href="#"><i class="fa-solid fa-train"></i>&nbsp; Train</a> -->
+        <a href="/pages/other-pages/contact.html"><i class="fa-solid fa-envelope"></i>&nbsp; Contact</a>
+      </nav>
+
+      <!-- Parent container to maintain relative positioning -->
+      <div class="user-auth-container">
+        <!-- Authentication Button -->
+        <a href="/user-dashboard/index.html" class="user-authentication-sign-in-button" id="authButton">
+          <i class="fa-solid fa-user"></i> Sign In
+        </a>
+        <!-- Dropdown Menu -->
+        <div id="userDropdown" class="dropdown">
+          <a href="#profileSection" data-section="profile" onclick="navigateToSection(event, 'profile')">
+            <i class="fas fa-user"></i>&nbsp;&nbsp;&nbsp;Profile
+          </a>
+          <a href="#loginDetailsSection" data-section="loginDetails" onclick="navigateToSection(event, 'loginDetails')">
+            <i class="fas fa-lock"></i>&nbsp;&nbsp;&nbsp;Login Details
+          </a>
+          <!-- <a href="#bookingsDetailsSection" data-section="bookingsDetails"
+            onclick="navigateToSection(event, 'bookingsDetails')">
+            <i class="fa-solid fa-ticket-airline"></i>&nbsp;&nbsp;&nbsp;Bookings
+          </a> -->
+          <a href="#coTravellersSection" data-section="coTravellers" onclick="navigateToSection(event, 'coTravellers')">
+            <i class="fas fa-users"></i>&nbsp;&nbsp;&nbsp;Co-travellers
+          </a>
+          <a href="#settingsSection" data-section="settings" onclick="navigateToSection(event, 'settings')">
+            <i class="fas fa-cog"></i>&nbsp;&nbsp;&nbsp;Settings
+          </a>
+          <a href="#termsConditionsSection" data-section="termsConditions"
+            onclick="navigateToSection(event, 'termsConditions')">
+            <i class="fa-solid fa-file"></i>&nbsp;&nbsp;&nbsp;Terms & Conditions
+          </a>
+          <a href="#" id="logoutButton" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;&nbsp;Logout
+          </a>
+        </div>
+      </div>
+    </header>
+  </div>
+  <br>
   <div class="tab-container">
     <div class="tabs">
       <button class="tab active" onclick="openTab(event, 'flight')">
-        <i class="fa-solid fa-plane-departure"></i>&nbsp;&nbsp;&nbsp;Flight
+        <i class="fa-solid fa-plane-departure"></i>&nbsp;&nbsp;&nbsp;Book your flight
       </button>
-      <button class="tab" onclick="openTab(event, 'train')">
+      <!-- <button class="tab" onclick="openTab(event, 'train')">
         <i class="fa-solid fa-train-subway"></i>&nbsp;&nbsp;&nbsp;Train
       </button>
       <button class="tab" onclick="openTab(event, 'bus')">
         <i class="fa-solid fa-bus"></i>&nbsp;&nbsp;&nbsp;Bus
-      </button>
+      </button> -->
     </div>
 
     <!-- Flight Booking Form -->
@@ -82,7 +135,7 @@
   </div>
 
   <!-- Train Booking Form -->
-  <div id="train" class="tab-content">
+  <!-- <div id="train" class="tab-content">
     <div class="form-group">
       <input type="text" id="trainFrom" placeholder="From" />
       <input type="text" id="trainTo" placeholder="To" />
@@ -98,13 +151,13 @@
       </button>
     </div>
     <div id="trainResults" class="results-container"></div>
-  </div>
+  </div> -->
 
   <!-- Bus Booking Form -->
-  <div id="bus" class="tab-content">
+  <!-- <div id="bus" class="tab-content">
     <p>Bus booking form will be added here.</p>
   </div>
-  </div>
+  </div> -->
 
   <div id="booking-popup" class="popup" style="display: none">
     <div class="popup-content"></div>
@@ -130,6 +183,7 @@
   </div>
 
   <script src="assets/script.js"></script>
+  <script src="user-dashboard/script.js"></script>
 </body>
 
 </html>

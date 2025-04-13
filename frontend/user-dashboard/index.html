@@ -40,9 +40,10 @@
       <nav class="navigation-links-center-booking" id="navLinks">
         <a href="/index.html"><i class="fa-solid fa-house"></i>&nbsp; Home</a>
         <a href="/pages/other-pages/about.html"><i class="fa-solid fa-info-circle"></i>&nbsp; About us</a>
-        <a href="/booking/booking.html" target="_blank"><i class="fa-solid fa-plane"></i>&nbsp; Flight</a>
-        <a href="#"><i class="fa-solid fa-bus"></i>&nbsp; Bus</a>
-        <a href="#"><i class="fa-solid fa-train"></i>&nbsp; Train</a>
+        <a href="/booking/booking.html" target="_blank"><i class="fa-solid fa-tickets-airline"></i>&nbsp; Book your
+          ticket</a>
+        <!-- <a href="#"><i class="fa-solid fa-bus"></i>&nbsp; Bus</a>
+        <a href="#"><i class="fa-solid fa-train"></i>&nbsp; Train</a> -->
         <a href="/pages/other-pages/contact.html"><i class="fa-solid fa-envelope"></i>&nbsp; Contact</a>
       </nav>
 
@@ -298,7 +299,20 @@
             <i class="fa-solid fa-ticket-airline"></i>&nbsp;&nbsp;&nbsp;Bookings
           </h2>
           <h3>You can check and manage your bookings easily right here.</h3>
-          <div id="bookingsList"></div>
+          <div class="bookingFilter-tooltip secure" style="display: flex; align-items: flex-end; gap: 8px;">
+            <input type="text" id="bookingDate" placeholder="Select Booking Date" />
+            <button onclick="filterBookingsByDate()" class="searchDate">Search by Date</button>
+            <button id="clearDateFilter" onclick="clearDateFilter()" class="clearDate" style="display: none;"><i
+                class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Clear</button>
+          </div>
+          <div class="dateError">
+            <p id="dateError">Please select a date to filter.</p>
+          </div>
+          <div id="bookingsList">
+            <!-- Loader will appear here initially -->
+            <span class="loader"></span>
+          </div>
+
           <!-- Container for booking details -->
         </section>
 
@@ -681,20 +695,42 @@ Room no.3, Chawl no.3, Three Star Compound, Near Navjyoti School, M</textarea>
     <div class="modal-content">
       <h2>Change Password</h2>
       <form id="changePasswordForm">
-        <label for="oldPassword">Old Password</label>
-        <input type="password" id="oldPassword" placeholder="Enter Old Password" required />
-        <label for="newPassword">New Password</label>
-        <input type="password" id="newPassword" placeholder="Enter New Password" required />
-        <label for="confirmPassword">Confirm Password</label>
-        <input type="password" id="confirmPassword" placeholder="Confirm New Password" required />
-        <p id="passwordError" class="error-message hidden">
-          Passwords do not match!
-        </p>
+        <div class="changepassword-wrapper">
+          <label for="oldPassword">Old Password</label>
+          <div class="password-field">
+            <input type="password" id="oldPassword" placeholder="Enter Old Password" required />
+            <span class="toggle-password" onclick="togglePassword('oldPassword')">
+              <i class="fas fa-eye-slash"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="changepassword-wrapper">
+          <label for="newPassword">New Password</label>
+          <div class="password-field">
+            <input type="password" id="newPassword" placeholder="Enter New Password" required />
+            <span class="toggle-password" onclick="togglePassword('newPassword')">
+              <i class="fas fa-eye-slash"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="changepassword-wrapper">
+          <label for="confirmPassword">Confirm Password</label>
+          <div class="password-field">
+            <input type="password" id="confirmPassword" placeholder="Confirm New Password" required />
+            <span class="toggle-password" onclick="togglePassword('confirmPassword')">
+              <i class="fas fa-eye-slash"></i>
+            </span>
+          </div>
+        </div>
+        <p id="passwordError" class="change-error-message change-hidden">Passwords do not match!</p>
+
         <div class="modal-buttons">
           <button type="button" class="cancel-btn" onclick="closeChangePassword()">
             Cancel
           </button>
-          <button type="submit" class="save-btn change-save">Save</button>
+          <button type="submit" class="save-btn change-save" onclick="return validatePasswords()">Save</button>
         </div>
       </form>
     </div>
@@ -708,6 +744,7 @@ Room no.3, Chawl no.3, Three Star Compound, Near Navjyoti School, M</textarea>
       allowInput: true,
       maxDate: new Date().setDate(new Date().getDate() - 1),
     });
+
   </script>
 
   <script src="script.js"></script>

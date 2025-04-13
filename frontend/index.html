@@ -458,63 +458,7 @@
                </div>
             </div>
          </a> -->
-         <div class="trip-search-section">
-            <div class="container">
-               <div class="tab-container">
-                  <div class="tabs">
-                     <button class="tab active" onclick="openTab(event, 'flight')">Flight</button>
-                     <button class="tab" onclick="openTab(event, 'train')">Train</button>
-                     <button class="tab" onclick="openTab(event, 'bus')">Bus</button>
-                  </div>
-
-                  <div id="flight" class="tab-content active">
-                     <div class="form-group">
-                        <input type="text" id="from" placeholder="From">
-                        <input type="text" id="to" placeholder="To">
-                        <input type="date" id="departure">
-                        <input type="date" id="return">
-                        <input type="number" id="adults" placeholder="Travellers">
-                        <select id="travelClass">
-                           <option value="economy">Economy</option>
-                           <option value="business">Business</option>
-                        </select>
-                        <button onclick="searchFlights()">Search</button>
-                     </div>
-                     <div id="results" class="results-container"></div>
-                  </div>
-
-                  <div id="train" class="tab-content">
-                     <p>Train booking form will be added here.</p>
-                  </div>
-
-                  <div id="bus" class="tab-content">
-                     <p>Bus booking form will be added here.</p>
-                  </div>
-               </div>
-
-               <div id="booking-popup" class="popup" style="display: none;">
-                  <div class="popup-content"></div>
-               </div>
-
-               <!-- Payment Section -->
-               <div id="payment-section" class="popup" style="display: none;">
-                  <div class="popup-content">
-                     <h2>Payment</h2>
-                     <p>Total Amount: ₹${selectedFlight ? selectedFlight.price.total : '0'}</p>
-                     <button onclick="handlePayment()">Pay Now</button>
-                  </div>
-               </div>
-
-               <!-- Confirmation Section -->
-               <div id="confirmation-section" class="popup" style="display: none;">
-                  <div class="popup-content">
-                     <h2>Booking Confirmed!</h2>
-                     <p>Your flight has been successfully booked.</p>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <!-- search search field html end -->
+         <br> <br> <br> 
          <section class="destination-section">
 
             <div class="container">
@@ -539,7 +483,7 @@
                               <div class="col-sm-6">
                                  <div class="desti-item overlay-desti-item">
                                     <figure class="desti-image">
-                                       <img src="assets/images/Mahabaleshwar-travel-by-adarsh-holidays.jpg" alt="">
+                                       <img src="/assets/images/Mahabaleshwar-travel-by-adarsh-holidays.jpg" alt="">
                                     </figure>
                                     <div class="meta-cat bg-meta-cat">
                                        <p>Mahabaleshwar</p>
@@ -602,7 +546,7 @@
          <div class="row no-gutters align-items-center">
             <div class="col-lg-5">
                <div class="callback-img"
-                  style="background-image: url(assets/images/travellers-travelling-with-adarsh-holidays.jpg);">
+                  style="background-image: url(/assets/images/travellers-travelling-with-adarsh-holidays.jpg);">
                </div>
             </div>
             <div class="col-lg-7">

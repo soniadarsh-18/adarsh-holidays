@@ -234,9 +234,21 @@ function showSection(sectionId, event) {
     fetchUserBookings();
   }
 }
+let allBookings = []; // Global storage for all bookings
+
+// Decode JWT Token
+function decodeJWT(token) {
+  try {
+    const payload = token.split('.')[1];
+    const decoded = atob(payload);
+    return JSON.parse(decoded);
+  } catch (e) {
+    return null;
+  }
+}
 
 // Fetch User Bookings
-async function fetchUserBookings() {
+async function fetchUserBookings(filterDate = null) {
   try {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -244,7 +256,6 @@ async function fetchUserBookings() {
       return;
     }
 
-    // Decode JWT to get userId
     const decodedToken = decodeJWT(token);
     if (!decodedToken || !decodedToken.userId) {
       throw new Error("Invalid token. Please login again.");
@@ -252,7 +263,6 @@ async function fetchUserBookings() {
 
     const userId = decodedToken.userId;
 
-    // ✅ Ensure the correct endpoint is used
     const response = await fetch(`https://adarsh-holidays-backend-production.up.railway.app/api/flights/user-bookings/${userId}`, {
       method: "GET",
       headers: {
@@ -266,8 +276,24 @@ async function fetchUserBookings() {
     }
 
     const data = await response.json();
+
     if (data.success) {
-      displayBookings(data.bookings); // ✅ Render bookings
+      allBookings = data.bookings;
+
+      let bookings = allBookings;
+
+      // ✅ Apply date filter if provided
+      if (filterDate) {
+        bookings = bookings.filter(booking => {
+          const depDate = new Date(booking.departureTime).toISOString().split("T")[0];
+          return depDate === filterDate;
+        });
+      }
+
+      displayBookings(bookings);
+
+      // Show or hide clear button
+      document.getElementById("clearDateFilter").style.display = filterDate ? "inline-block" : "none";
     } else {
       throw new Error("No bookings found.");
     }
@@ -277,6 +303,52 @@ async function fetchUserBookings() {
   }
 }
 
+// Filter button click handler
+function filterBookingsByDate() {
+  const dateInput = document.getElementById("bookingDate").value;
+  const errorElement = document.getElementById("dateError");
+
+  if (!dateInput) {
+    errorElement.textContent = "Please select a date to filter.";
+    errorElement.style.display = "block";
+    return;
+  }
+
+  errorElement.style.display = "none"; // Hide error if date selected
+
+  const filtered = allBookings.filter(booking => {
+    const depDate = new Date(booking.departureTime).toISOString().split("T")[0];
+    return depDate === dateInput;
+  });
+
+  displayBookings(filtered);
+  document.getElementById("clearDateFilter").style.display = "inline-block";
+}
+
+// Clear filter
+function clearDateFilter() {
+  const dateInput = document.getElementById("bookingDate");
+  const errorElement = document.getElementById("dateError");
+
+  dateInput.value = "";
+  dateInput.placeholder = "Select Booking Date";
+  errorElement.textContent = "";
+  errorElement.style.display = "none";
+
+  // Reset the flatpickr input
+  flatpickr("#bookingDate").clear(); // Clears the date and resets the input
+
+  displayBookings(allBookings);
+  document.getElementById("clearDateFilter").style.display = "none";
+}
+
+// Flatpickr initialization
+flatpickr("#bookingDate", {
+  dateFormat: "Y-m-d",
+  altInput: true,
+  altFormat: "d-m-Y",
+  allowInput: true,
+});
 
 
 // Format Date and Time
@@ -374,55 +446,64 @@ function checkEmptyBookings() {
 
 function displayBookings(bookings) {
   const bookingsList = document.getElementById("bookingsList");
-  bookingsList.innerHTML = ""; // Clear previous content
 
-  if (!bookings || bookings.length === 0) {
-    bookingsList.innerHTML = `<p class="no-bookings">No bookings found.</p>`;
-    return;
-  }
+  // Show the loader while waiting for data
+  bookingsList.innerHTML = `<span class="loader"></span>`;
 
-  // Show latest bookings at the top
-  bookings.slice().reverse().forEach((booking) => {
-    const bookingCard = document.createElement("div");
-    bookingCard.classList.add("booking-card");
-    bookingCard.id = `booking-${booking.bookingId}`;
+  // Simulate API delay (if applicable)
+  setTimeout(() => {
+    bookingsList.innerHTML = ""; // Clear previous content or loader
 
-    bookingCard.innerHTML = `
-      <div class="booking-header">
-        <div class="flight-icon">
-          <i class="fa-solid fa-plane-up"></i>
-        </div>
-        <div class="flight-info">
-          <h3>${booking.flightNumber} | ${booking.departure} → ${booking.arrival}</h3>
-          <p>${formatDateTime(booking.departureTime)}</p>
-        </div>
-        <div class="price">
-          <h3><b>${booking.status}</b></h3>
-        </div>
-      </div>
+    if (!bookings || bookings.length === 0) {
+      bookingsList.innerHTML = `<p class="no-bookings">No bookings found.</p>`;
+      return;
+    }
 
-      <div class="booking-footer">
-        <button id="toggle-btn-${booking.bookingId}" onclick="toggleFlightDetails('${booking.bookingId}')">
-          View Flight Details
-        </button>
-      </div>
+    // Show latest bookings at the top
+    bookings.slice().reverse().forEach((booking) => {
+      const bookingCard = document.createElement("div");
+      bookingCard.classList.add("booking-card");
+      bookingCard.id = `booking-${booking.bookingId}`;
 
-      <div class="flight-details" id="flight-details-${booking.bookingId}" style="display: none;">
-        <h4>${booking.flightNumber} | ${booking.departure} → ${booking.arrival}</h4>
-        <p><strong>Departure:</strong> ${formatDateTime(booking.departureTime)}</p>
-        <p><strong>Arrival:</strong> ${formatDateTime(booking.arrivalTime)}</p>
-        <p><strong>Price:</strong> ₹${booking.price}</p>
-        <p id="error-msg-${booking.bookingId}" class="error-msg"></p>
-        <button id="cancel-btn-${booking.bookingId}" onclick="cancelBooking('${booking.bookingId}')">
-          Cancel Booking
-        </button>
-      </div>
-    `;
+      bookingCard.innerHTML = `
+  <div class="booking-header">
+    <div class="flight-icon">
+      <i class="fa-solid fa-plane-up"></i>
+    </div>
+    <div class="flight-info">
+      <h3>${booking.flightNumber} | ${booking.departure} → ${booking.arrival}</h3>
+      <p>${formatDateTime(booking.departureTime)}</p>
+      <p><strong>Booking ID:</strong> ${booking.bookingId}</p>
+    </div>
+    <div class="price">
+      <h3><b>${booking.status}</b></h3>
+    </div>
+  </div>
 
-    bookingsList.appendChild(bookingCard);
-  });
+  <div class="booking-footer">
+    <button id="toggle-btn-${booking.bookingId}" onclick="toggleFlightDetails('${booking.bookingId}')">
+      View Flight Details
+    </button>
+  </div>
+
+  <div class="flight-details" id="flight-details-${booking.bookingId}" style="display: none;">
+    <h4>${booking.flightNumber} | ${booking.departure} → ${booking.arrival}</h4>
+    <p><strong>Booking ID:</strong> ${booking.bookingId}</p>
+    <p><strong>Departure:</strong> ${formatDateTime(booking.departureTime)}</p>
+    <p><strong>Arrival:</strong> ${formatDateTime(booking.arrivalTime)}</p>
+    <p><strong>Price:</strong> ₹${booking.price}</p>
+    <p id="error-msg-${booking.bookingId}" class="error-msg"></p>
+    <button id="cancel-btn-${booking.bookingId}" onclick="cancelBooking('${booking.bookingId}')">
+      Cancel Booking
+    </button>
+  </div>
+`;
+
+
+      bookingsList.appendChild(bookingCard);
+    });
+  }, 1500); // Simulate a delay (replace this with your actual API call)
 }
-
 
 
 // Decode JWT Token to Extract userId
@@ -673,39 +754,58 @@ function saveTravellers(event) {
   // Call the function on page load
   fetchUserDetails();
 })();
+document.addEventListener("DOMContentLoaded", function () {
+  const newPasswordInput = document.getElementById("newPassword");
+  const confirmPasswordInput = document.getElementById("confirmPassword");
+  const passwordError = document.getElementById("passwordError");
+
+  // Live validation while typing
+  function checkPasswordsMatch() {
+    if (newPasswordInput.value && confirmPasswordInput.value) {
+      if (newPasswordInput.value !== confirmPasswordInput.value) {
+        passwordError.classList.remove("hidden");
+      } else {
+        passwordError.classList.add("hidden");
+      }
+    }
+  }
+
+  confirmPasswordInput.addEventListener("input", checkPasswordsMatch);
+  newPasswordInput.addEventListener("input", checkPasswordsMatch);
+});
 
 document
   .getElementById("changePasswordForm")
   .addEventListener("submit", async function (event) {
     event.preventDefault(); // Prevent form from reloading the page
 
-    const saveBtn = document.querySelector(".change-save"); // Select the button
+    const saveBtn = document.querySelector(".change-save");
     saveBtn.textContent = "Saving...";
-    saveBtn.disabled = true; // Disable button during update
+    saveBtn.disabled = true;
 
     const oldPassword = document.getElementById("oldPassword").value;
     const newPassword = document.getElementById("newPassword").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
     const passwordError = document.getElementById("passwordError");
 
-    // Validation: Check if new passwords match
+    // Final check before sending API
     if (newPassword !== confirmPassword) {
-      passwordError.classList.remove("hidden");
-      saveBtn.textContent = "Save"; // Reset button
+      passwordError.classList.remove("change-hidden");
+      saveBtn.textContent = "Save";
       saveBtn.disabled = false;
       return;
     } else {
-      passwordError.classList.add("hidden");
+      passwordError.classList.add("change-hidden");
     }
 
-    const token = localStorage.getItem("token"); // Retrieve the authentication token
+    const token = localStorage.getItem("token");
 
     try {
       const response = await fetch(`${API_BASE_URL}/user/change-password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Include auth token
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           oldPassword: oldPassword,
@@ -717,39 +817,39 @@ document
       const data = await response.json();
 
       if (response.ok) {
-        // Update button text and style to indicate success
         saveBtn.textContent = "Saved";
-        saveBtn.style.backgroundColor = "green"; // Make button green
+        saveBtn.style.backgroundColor = "green";
         saveBtn.style.color = "white";
 
-        // Close the change password modal after success
         closeChangePassword();
 
-        // Reset button after 2 seconds
         setTimeout(() => {
           saveBtn.textContent = "Save";
           saveBtn.disabled = false;
-          saveBtn.style.backgroundColor = ""; // Reset to default color
+          saveBtn.style.backgroundColor = "";
           saveBtn.style.color = "";
         }, 2000);
       } else {
-        saveBtn.textContent = "Save"; // Reset button on error
+        // Show backend error if any
+        if (data?.message) {
+          alert(data.message); // Or show inside an element
+        }
+        saveBtn.textContent = "Save";
         saveBtn.disabled = false;
       }
     } catch (error) {
       console.error("Error changing password:", error);
-      saveBtn.textContent = "Save"; // Reset button on error
+      saveBtn.textContent = "Save";
       saveBtn.disabled = false;
     }
   });
+
 
 // Function to close the modal
 function closeChangePassword() {
   document.getElementById("changePasswordModal").classList.add("hidden");
 }
 
-// Co-travvelrs
-// Co-travelers
 // Co-travelers
 document.addEventListener("DOMContentLoaded", fetchTravellers);
 

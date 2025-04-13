@@ -5,7 +5,13 @@ const {
   getUserBookings,
   updateBooking,
   deleteBooking,
+
 } = require("../controllers/flightController");
+const {
+  sendLoginNotificationEmail,
+  sendBookingConfirmationEmail,
+} = require("../services/emailService");
+
 
 const router = express.Router();
 

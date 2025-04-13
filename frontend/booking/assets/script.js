@@ -1063,7 +1063,7 @@ function updatePopupContent(flight) {
   popupContent.innerHTML = `
     <span class="close-btn" onclick="closePopup()">&times;</span>
     <div class="section">
-        <h2>${fromPlace} (${flight.itineraries[0].segments[0].departure.iataCode}) → ${toPlace} (${flight.itineraries[0].segments[0].arrival.iataCode})</h2>
+        <h2>${fromPlace} → ${toPlace}</h2>
         <p>${new Date(flight.itineraries[0].segments[0].departure.at).toDateString()}</p>
         <p>${flight.itineraries[0].segments.length - 1 === 0 ? "Non Stop" : `${flight.itineraries[0].segments.length - 1} Stop`} · ${flight.itineraries[0].duration}</p>
         <p>Non-refundable</p>
@@ -1202,7 +1202,7 @@ async function handlePayment() {
         email: localStorage.getItem("userEmail") || "guest@example.com",
         contact: localStorage.getItem("userMobile") || "0000000000"
       },
-      theme: { color: "#3399cc" },
+      theme: { color: "#FF6000" },
       modal: {
         ondismiss: function () {
           payButton.disabled = false;

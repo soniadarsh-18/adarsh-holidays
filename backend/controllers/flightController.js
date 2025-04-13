@@ -3,6 +3,7 @@ require("dotenv").config();
 const FlightBooking = require("../models/FlightBooking");
 const mongoose = require("mongoose");
 const User = require("../models/User"); // Import User model
+const sendBookingConfirmationEmail = require("../services/emailService");
 
 // Store Amadeus API Token and Expiry Time
 let AMADEUS_ACCESS_TOKEN = "";
@@ -275,6 +276,7 @@ const updateBooking = async (req, res) => {
   }
 };
 
+// 🔹 Delete Booking
 const deleteBooking = async (req, res) => {
   try {
     const { bookingId } = req.params;
@@ -286,31 +288,39 @@ const deleteBooking = async (req, res) => {
 
     console.log(`🛑 Deleting Booking with ID: ${bookingId}`);
 
-    // ✅ Find user who has this booking
+    // ✅ Step 1: Delete from user's bookings array
     const updatedUser = await User.findOneAndUpdate(
-      { "bookings.bookingId": bookingId }, // Find user with this bookingId
-      { $pull: { bookings: { bookingId } } }, // Remove the booking from user's bookings array
+      { "bookings.bookingId": bookingId },
+      { $pull: { bookings: { bookingId: bookingId } } },
       { new: true }
     );
 
-    // ✅ If no user found, booking doesn't exist
     if (!updatedUser) {
-      return res.status(404).json({ success: false, error: "Booking not found" });
+      return res.status(404).json({ success: false, error: "Booking not found in user record" });
     }
 
-    console.log(`✅ Booking ${bookingId} deleted successfully`);
+    // ✅ Step 2: Delete from flightbookings collection
+    const deletedBooking = await FlightBooking.findOneAndDelete({ bookingId: bookingId });
 
-    return res.json({
+    if (!deletedBooking) {
+      return res.status(404).json({ success: false, error: "Booking not found in flightbookings collection" });
+    }
+
+    console.log(`✅ Booking ${bookingId} deleted successfully from user & flightbookings`);
+
+    return res.status(200).json({
       success: true,
       message: "Booking deleted successfully",
-      updatedUser, // Optionally return user data if needed
+      user: updatedUser,
+      deletedFlightBooking: deletedBooking
     });
 
   } catch (error) {
     console.error("❌ Error deleting booking:", error);
-    res.status(500).json({ success: false, error: "Failed to delete booking" });
+    return res.status(500).json({ success: false, error: "Internal server error" });
   }
 };
+
 
 
 

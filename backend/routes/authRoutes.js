@@ -50,7 +50,7 @@ router.post("/register", async (req, res) => {
     await user.save();
 
     // ✅ Send Email Verification Link
-    const verificationLink = `http://localhost:5000/api/auth/verify-email/${verificationToken}`;
+    const verificationLink = `https://adarsh-holidays-backend-production.up.railway.app/api/auth/verify-email/${verificationToken}`;
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
@@ -206,7 +206,12 @@ router.post("/login", async (req, res) => {
                 <div class="message">
                   <p>Hello ${user.fullName},</p>
                   <p>You have successfully logged into your account.</p>
-                  <p>If this was not you, please Sign Up us immediately.</p>
+                  <p>If this was not you, <a href="mailto:adarshholidayss@gmail.com?subject=Unauthorized Login Attempt&body=Hi%20Adarsh%20Holidays%20Team,%0A%0AI%20am%20[Add%20your%20name]%20and%20I%20found%20that%20a%20login%20was%20made%20through%20my%20account%20[Add%20your%20email%20ID].%20I%20was%20not%20aware%20of%20this,%20so%20please%20check%20and%20let%20me%20know%20the%20details.%0A%0ALooking%20forward%20to%20your%20prompt%20response.%0A%0AThank%20you,%0A[Your%20Name]" 
+style="color: dodgerblue; text-decoration: underline;">
+Report
+</a>
+
+ us immediately.</p>
                 </div>
                 <div class="footer">
                   <p>Thank you,</p>

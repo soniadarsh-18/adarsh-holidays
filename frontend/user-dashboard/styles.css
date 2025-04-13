@@ -565,6 +565,8 @@ button {
   border: 1px solid transparent;
 }
 
+
+
 .edit-btn,
 .add-btn {
   background: linear-gradient(135deg, #ff7300, #ff5500);
@@ -575,6 +577,92 @@ button {
   font-size: 16px;
   border-radius: 8px;
   font-weight: 600;
+}
+
+.searchDate {
+  background: linear-gradient(135deg, #ff7300, #ff5500);
+  box-shadow: 0 5px 20px rgba(255, 153, 0, 0.5);
+  color: white;
+  cursor: pointer;
+  font-family: "Rubik", sans-serif;
+  font-size: 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 10px 18px;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  border: 3px solid;
+  border-color: #FFF #FFF transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+.loader::after {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 6px solid;
+  border-color: transparent #FF3D00 #FF3D00;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  animation: rotationBack 0.5s linear infinite;
+  transform-origin: center center;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotationBack {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.clearDate {
+  background: #ffffff;
+  color: #D42626;
+  cursor: pointer;
+  font-family: "Rubik", sans-serif;
+  font-size: 15px;
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 7px 16px;
+  border: 4px solid #D42626;
+}
+
+.clearDate:hover {
+  background: #D42626;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: "Rubik", sans-serif;
+  font-size: 15px;
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 7px 16px;
+  border: 4px solid #D42626;
 }
 
 /* Hover Effect */
@@ -670,12 +758,6 @@ button {
   color: white;
   padding: 10px 15px;
   cursor: pointer;
-}
-
-/* Hover Effects */
-button:hover {
-  opacity: 0.85;
-  transform: scale(1.05);
 }
 
 button:active {
@@ -938,6 +1020,17 @@ select {
   display: none;
 }
 
+.change-hidden {
+  display: none;
+}
+
+.change-error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+
 #logged-in-devices .device {
   border: 1px solid #ccc;
   padding: 12px;
@@ -989,6 +1082,93 @@ select {
   visibility: visible;
   opacity: 1;
 }
+
+.bookingFilter-tooltip {
+  display: flex;
+  align-items: flex-end;
+  /* Align items to the flex end */
+  gap: 8px;
+  width: 100%;
+  /* Ensure full width of the container */
+  justify-content: flex-end;
+  /* Align items to the end of the container */
+  margin-bottom: 30px;
+}
+
+.bookingFilter-tooltip input {
+  flex-grow: 1;
+  /* Input should take up remaining space */
+  max-width: 200px;
+  /* Optional: You can limit the max width to control the input field size */
+  font-family: "Rubik", sans-serif;
+  cursor: pointer;
+}
+
+.bookingFilter-tooltip button {
+  flex-shrink: 0;
+  /* Prevent buttons from shrinking */
+}
+
+#clearDateFilter {
+  display: none;
+  /* Hidden by default */
+}
+
+.bookingFilter-tooltip-wrapper .bookingFilter-tooltip {
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 6px 10px;
+  border-radius: 4px;
+  position: absolute;
+  top: 50%;
+  right: -240px;
+  white-space: nowrap;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-family: "Rubik", sans-serif;
+  font-size: 14px;
+  z-index: 1;
+}
+
+.bookingFilter-tooltip-wrapper .bookingFilter-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #333 transparent transparent;
+  transform: translateY(-50%);
+}
+
+.bookingFilter-tooltip-wrapper:hover .bookingFilter-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.dateError {
+  display: flex;
+  justify-content: flex-end;
+  /* Align to the start */
+  align-items: flex-end;
+  /* Align the content at the bottom */
+  margin-top: 10px;
+  /* Optional: space between the input section and error message */
+}
+
+#dateError {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  display: none;
+  /* Hidden by default */
+  align-self: flex-start;
+  /* Align the error message to the start of the container */
+}
+
 
 .add-now-btn {
   background-color: #007bff;
@@ -1948,11 +2128,27 @@ input:checked+.slider:before {
   padding-right: 45px;
 }
 
-/* Eye icon for password visibility */
+.changepassword-wrapper {
+  margin-bottom: 20px;
+}
+
+.password-field {
+  position: relative;
+}
+
+.password-field input {
+  width: 100%;
+  padding: 12px 45px 12px 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
 .toggle-password {
   position: absolute;
   right: 15px;
-  top: 40%;
+  top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
   color: #888;
@@ -1963,9 +2159,6 @@ input:checked+.slider:before {
   color: #000;
 }
 
-.toggle-password:active {
-  color: #000;
-}
 
 .no-bookings,
 .error-msg {

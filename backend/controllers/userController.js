@@ -686,9 +686,8 @@ exports.getProfilePicture = async (req, res) => {
         .json({ success: false, message: "User not found" });
     }
 
-    const profilePicPath = `${process.env.BASE_URL}/uploads/profile_pictures/${
-      user.profilePicture || "default.jpg"
-    }`;
+    const profilePicPath = `${process.env.BASE_URL}/uploads/profile_pictures/${user.profilePicture || "default.jpg"
+      }`;
 
     res.json({
       success: true,
@@ -853,19 +852,36 @@ exports.getUserSettings = async (req, res) => {
 };
 
 // Update user settings
+// Update user settings
 exports.updateUserSettings = async (req, res) => {
   try {
     const { disableLoginEmails, country } = req.body;
-    
+
     const user = await User.findById(req.params.userId);
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    user.settings.disableLoginEmails = disableLoginEmails;
-    user.settings.country = country;
+    // Initialize settings object if not present
+    if (!user.settings) {
+      user.settings = {};
+    }
+
+    // Optional fields update
+    if (disableLoginEmails !== undefined) {
+      user.settings.disableLoginEmails = disableLoginEmails;
+    }
+
+    if (country) {
+      user.settings.country = country;
+    }
+
     await user.save();
 
-    res.json({ message: "Settings updated successfully", settings: user.settings });
+    res.json({
+      message: "Settings updated successfully",
+      settings: user.settings,
+    });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Error updating user settings:", error);
+    res.status(500).json({ message: "Something went wrong", error: error.message });
   }
 };
