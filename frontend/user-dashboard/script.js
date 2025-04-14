@@ -271,6 +271,7 @@ async function fetchUserBookings(filterDate = null) {
       },
     });
 
+
     const data = await response.json();
 
     if (data.success) {

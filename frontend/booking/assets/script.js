@@ -1047,17 +1047,20 @@ function closePopup() {
 }
 
 // Update popup content with flight details and Razorpay integration
+// Update popup content with flight details and Razorpay integration
 function updatePopupContent(flight) {
   const popupContent = document.querySelector(".popup-content");
   const fromPlace = document.getElementById("from").value;
   const toPlace = document.getElementById("to").value;
 
-  // Store the selected flight globally with proper formatting
+  // Store the selected flight globally with proper formatting and place names
   window.selectedFlight = {
     ...flight,
     price: {
-      total: parseFloat(flight.price.total).toFixed(2) // Ensure proper decimal format
-    }
+      total: parseFloat(flight.price.total).toFixed(2)
+    },
+    fromPlace,  // 👈 Store full place name
+    toPlace     // 👈 Store full place name
   };
 
   popupContent.innerHTML = `
@@ -1083,6 +1086,7 @@ function updatePopupContent(flight) {
     </div>
   `;
 }
+
 // Function to book flight before payment
 async function bookFlight() {
   try {
@@ -1101,7 +1105,7 @@ async function bookFlight() {
       price: window.selectedFlight.price
     };
 
-    // You should replace this with actual passenger data collection
+    // Replace this with dynamic passenger data as needed
     const passengers = [
       { name: "Passenger 1", age: 30, gender: "Male" },
       { name: "Passenger 2", age: 28, gender: "Female" }
@@ -1110,7 +1114,9 @@ async function bookFlight() {
     const bookingData = {
       userId: userId,
       flightOffer: flightOffer,
-      passengers: passengers
+      passengers: passengers,
+      fromPlace: window.selectedFlight.fromPlace,  // ✅ send full From place
+      toPlace: window.selectedFlight.toPlace       // ✅ send full To place
     };
 
     const response = await fetch("https://adarsh-holidays-backend-production.up.railway.app/api/flights/book", {
