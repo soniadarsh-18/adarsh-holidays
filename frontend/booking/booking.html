@@ -37,35 +37,8 @@
       <!-- Parent container to maintain relative positioning -->
       <div class="user-auth-container">
         <!-- Authentication Button -->
-        <a href="/user-dashboard/index.html" class="user-authentication-sign-in-button" id="authButton">
-          <i class="fa-solid fa-user"></i> Sign In
+        <a href="/user-dashboard/index.html">Back to Account</a>
         </a>
-        <!-- Dropdown Menu -->
-        <div id="userDropdown" class="dropdown">
-          <a href="#profileSection" data-section="profile" onclick="navigateToSection(event, 'profile')">
-            <i class="fas fa-user"></i>&nbsp;&nbsp;&nbsp;Profile
-          </a>
-          <a href="#loginDetailsSection" data-section="loginDetails" onclick="navigateToSection(event, 'loginDetails')">
-            <i class="fas fa-lock"></i>&nbsp;&nbsp;&nbsp;Login Details
-          </a>
-          <!-- <a href="#bookingsDetailsSection" data-section="bookingsDetails"
-            onclick="navigateToSection(event, 'bookingsDetails')">
-            <i class="fa-solid fa-ticket-airline"></i>&nbsp;&nbsp;&nbsp;Bookings
-          </a> -->
-          <a href="#coTravellersSection" data-section="coTravellers" onclick="navigateToSection(event, 'coTravellers')">
-            <i class="fas fa-users"></i>&nbsp;&nbsp;&nbsp;Co-travellers
-          </a>
-          <a href="#settingsSection" data-section="settings" onclick="navigateToSection(event, 'settings')">
-            <i class="fas fa-cog"></i>&nbsp;&nbsp;&nbsp;Settings
-          </a>
-          <a href="#termsConditionsSection" data-section="termsConditions"
-            onclick="navigateToSection(event, 'termsConditions')">
-            <i class="fa-solid fa-file"></i>&nbsp;&nbsp;&nbsp;Terms & Conditions
-          </a>
-          <a href="#" id="logoutButton" onclick="logout()">
-            <i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;&nbsp;Logout
-          </a>
-        </div>
       </div>
     </header>
   </div>
@@ -184,7 +157,7 @@
   </div>
 
   <script src="assets/script.js"></script>
-  <script src="user-dashboard/script.js"></script>
+  <script src="/user-dashboard/script.js"></script>
 </body>
 
 </html>
