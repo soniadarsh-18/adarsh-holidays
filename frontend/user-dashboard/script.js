@@ -287,13 +287,24 @@ async function fetchUserBookings(filterDate = null) {
         });
       }
 
+      // ✅ Check if bookings are empty and show message
+      if (!bookings || bookings.length === 0) {
+        bookingsList.innerHTML = `<p class="no-bookings">No bookings found.</p>`;
+        document.getElementById("clearDateFilter").style.display = "none";
+        return;
+      }
+
+      // ✅ Display bookings if available
       displayBookings(bookings);
 
-      // Show or hide clear button
+      // ✅ Show or hide clear button
       document.getElementById("clearDateFilter").style.display = filterDate ? "inline-block" : "none";
     } else {
-      throw new Error("No bookings found.");
+      // ✅ Replaced the error throw with UI message
+      bookingsList.innerHTML = `<p class="no-bookings">No bookings found.</p>`;
+      document.getElementById("clearDateFilter").style.display = "none";
     }
+
   } catch (error) {
     console.error("Error fetching flight bookings:", error);
     alert(error.message);
