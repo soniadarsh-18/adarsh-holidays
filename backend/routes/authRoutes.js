@@ -440,17 +440,18 @@ router.post("/reset-password/:token?", resetPasswordCors, async (req, res) => {
   }
 });
 
-// ✅ Email Verification Route with Redirect to HTML Page
+// ✅ Email Verification Route with Redirect to Frontend Page
 router.get("/verify-email/:token", async (req, res) => {
   try {
     const { token } = req.params;
 
-    // 🔍 Find user by verification token
+    // Find user by verification token
     const user = await User.findOne({ verificationToken: token });
 
     if (!user) {
-      // ❌ If user not found → redirect to error HTML
-      return res.sendFile(path.join(__dirname, '../public/email-verification-failed.html'));
+      return res.redirect(
+        `${process.env.CLIENT_URL}/email-verification-failed.html`
+      );
     }
 
     // ✅ Mark user as verified
@@ -458,14 +459,15 @@ router.get("/verify-email/:token", async (req, res) => {
     user.verificationToken = null;
     await user.save();
 
-    // ✅ Redirect to success HTML page
-    return res.sendFile(path.join(__dirname, '../public/verify-email.html'));
+    // ✅ Redirect to success page after verification
+    return res.redirect(
+      `${process.env.CLIENT_URL}https://adarsh-holidays-backend-production.up.railway.app/authentication/verify-email.html`
+    );
   } catch (err) {
     console.error("❌ Email Verification Error:", err);
-    res.sendFile(path.join(__dirname, '../public/email-verification-failed.html'));
+    res.redirect(`${process.env.CLIENT_URL}/email-verification-failed.html`);
   }
 });
-
 
 // ✅ Check if Email Exists
 router.get("/check-email", async (req, res) => {
